@@ -173,21 +173,37 @@ export default async function handler(req, res) {
 
   const systemPrompt = mode === 'sharp' ? SHARP_PROMPT : WARM_PROMPT;
 
+  // 재시도 함수
+  async function fetchWithRetry(maxRetries = 3) {
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 1500,
+          system: systemPrompt,
+          messages: messages
+        })
+      });
+
+      // 529 과부하 오류면 잠깐 기다렸다가 재시도
+      if (response.status === 529 && attempt < maxRetries - 1) {
+        const delay = (attempt + 1) * 2000; // 2초, 4초, 6초
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+
+      return response;
+    }
+  }
+
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1500,
-        system: systemPrompt,
-        messages: messages
-      })
-    });
+    const response = await fetchWithRetry();
 
     if (!response.ok) {
       const errData = await response.json().catch(() => ({}));
