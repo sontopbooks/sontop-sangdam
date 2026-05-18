@@ -326,6 +326,72 @@
 
   .coaching-block .response-text { color: var(--ink); font-size: 1.05rem; font-weight: 400; font-style: italic; }
 
+  /* ── 별점 + 공유 ── */
+  .feedback-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--paper-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .feedback-label {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-ghost);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .star {
+    font-size: 2rem;
+    color: var(--paper-dark);
+    cursor: pointer;
+    transition: color 0.15s, transform 0.1s;
+    user-select: none;
+  }
+
+  .star:hover, .star.active { color: #c4a130; }
+  .star:active { transform: scale(1.2); }
+
+  .star-msg {
+    font-family: var(--serif);
+    font-size: 0.88rem;
+    color: var(--wood);
+    margin-top: 0.6rem;
+    font-weight: 300;
+    min-height: 1.4rem;
+  }
+
+  .share-section { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .share-btn:hover { opacity: 0.85; }
+  .share-btn.kakao { background: #FEE500; color: #3A1D1D; }
+  .share-btn.link { background: var(--paper-warm); color: var(--ink-soft); border: 1px solid var(--paper-dark); }
+
   /* ── 위기 안내 ── */
   .crisis-block {
     display: none;
@@ -382,6 +448,113 @@
   .error-block { display: none; background: #fdf5f0; border: 1px solid #e8c8b8; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
   .error-block.visible { display: block; }
   .error-block p { font-family: var(--sans); font-size: 0.82rem; color: #8b4a2e; line-height: 1.8; }
+
+  /* ── 만든 사람 소개 ── */
+  .about-section {
+    margin-top: 4rem;
+    border-top: 1px solid var(--paper-dark);
+    border-bottom: 1px solid var(--paper-dark);
+  }
+
+  .about-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    font-weight: 400;
+    user-select: none;
+  }
+
+  .about-toggle:hover { color: var(--wood); }
+
+  .about-arrow {
+    font-size: 1rem;
+    color: var(--wood-light);
+    transition: transform 0.3s;
+  }
+
+  .about-arrow.open { transform: rotate(180deg); }
+
+  .about-content {
+    display: none;
+    padding: 0 0 2rem;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .about-content.visible { display: block; }
+
+  .about-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .about-roles {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--wood);
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-divider {
+    width: 30px;
+    height: 1px;
+    background: var(--wood-light);
+    margin: 1.25rem 0;
+  }
+
+  .about-text {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 2.1;
+    word-break: keep-all;
+  }
+
+  .about-book { padding: 1rem 1.25rem; background: var(--paper-warm); border-radius: var(--radius); }
+  .about-book-label { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--wood); display: block; margin-bottom: 0.3rem; }
+  .about-book-title { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 0.4rem; }
+  .about-book-desc { font-family: var(--serif); font-size: 0.85rem; font-weight: 300; color: var(--ink-soft); margin: 0; }
+
+  .about-brand-text {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 2;
+    word-break: keep-all;
+  }
+
+  .about-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .about-link {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--wood);
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--paper-dark);
+    border-radius: var(--radius);
+    background: var(--paper-warm);
+    transition: border-color 0.2s;
+  }
+
+  .about-link:hover { border-color: var(--wood-light); }
 
   .disclaimer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--paper-dark); font-family: var(--sans); font-size: 0.72rem; color: var(--ink-ghost); line-height: 1.9; text-align: center; }
 
@@ -479,6 +652,31 @@
     </div>
 
     <button class="reset-btn" onclick="resetForm()">다른 이야기 꺼내기</button>
+
+    <!-- 별점 + 공유 -->
+    <div class="feedback-section">
+      <div class="star-section">
+        <p class="feedback-label">오늘 마음방이 도움이 되었나요?</p>
+        <div class="stars" id="stars">
+          <span class="star" onclick="rateStar(1)">★</span>
+          <span class="star" onclick="rateStar(2)">★</span>
+          <span class="star" onclick="rateStar(3)">★</span>
+          <span class="star" onclick="rateStar(4)">★</span>
+          <span class="star" onclick="rateStar(5)">★</span>
+        </div>
+        <p class="star-msg" id="star-msg"></p>
+      </div>
+
+      <div class="share-section">
+        <p class="feedback-label">이 공간을 나누고 싶다면</p>
+        <button class="share-btn kakao" onclick="shareKakao()">
+          <span>💬</span> 카카오톡으로 공유
+        </button>
+        <button class="share-btn link" onclick="copyLink()">
+          <span>🔗</span> 링크 복사
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- 위기 안내 -->
@@ -496,6 +694,41 @@
     <button class="reset-btn" onclick="resetForm()" style="margin-top:1.5rem;">처음으로 돌아가기</button>
   </div>
 
+  <!-- 만든 사람 소개 -->
+  <div class="about-section">
+    <div class="about-toggle" onclick="toggleAbout()">
+      <span class="about-toggle-text">이 공간을 만든 사람</span>
+      <span class="about-arrow" id="about-arrow">↓</span>
+    </div>
+    <div class="about-content" id="about-content">
+      <div class="about-name">웃네 &nbsp;·&nbsp; 박의섭</div>
+      <div class="about-roles">시인 &nbsp;·&nbsp; 목수 &nbsp;·&nbsp; 코치 &nbsp;·&nbsp; 명상가</div>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        강원도 횡성 숲속 공방에서 나무를 깎으며 시를 씁니다.<br><br>
+        나무를 깎다 보면 어느 순간 군더더기가 사라지고 본질만 남습니다. 삶도 그렇다고 생각합니다. 덜어낼수록 진짜가 보입니다.<br><br>
+        한국코치협회 인증 코치로 오랫동안 사람들의 이야기를 들어왔습니다. 철학과 명상, 코칭이 따로 있지 않습니다. 결국 하나입니다. 지금 이것.
+      </p>
+      <div class="about-divider"></div>
+      <div class="about-book">
+        <span class="about-book-label">첫 시집</span>
+        <span class="about-book-title">『웃네』 — 2026년 출간</span>
+        <p class="about-book-desc">손톱만 한 서점에서 마음만 한 시를 나눕니다.</p>
+      </div>
+      <div class="about-divider"></div>
+      <div class="about-brand">
+        <p class="about-brand-text">
+          <strong>손톱서점</strong>은 시집·그림책·수필 각 1권씩, 늘 3권만 큐레이션하는 작은 서점입니다.<br>
+          많이 파는 것이 아니라, 꼭 맞는 한 권을 건네는 것이 목표입니다.
+        </p>
+      </div>
+      <div class="about-links">
+        <a href="https://pf.kakao.com/_xosonotopseojeon" target="_blank" class="about-link">💬 카카오 채널: 손톱서점</a>
+        <a href="https://www.youtube.com/@CarvingStillness" target="_blank" class="about-link">▶ 유튜브: Carving Stillness</a>
+      </div>
+    </div>
+  </div>
+
   <div class="disclaimer">
     이 공간은 심리치료나 정신건강 치료 서비스가 아닙니다.<br>
     철학·명상·코칭을 바탕으로 한 성찰의 공간입니다.<br>
@@ -509,7 +742,8 @@
     손톱서점 마음방 &nbsp;|&nbsp; 웃네(박의섭) · 강원도 횡성 숲속 공방<br>
     <a href="https://pf.kakao.com/_xosonotopseojeon" target="_blank">카카오 채널: 손톱서점</a>
     &nbsp;·&nbsp;
-    <a href="https://www.youtube.com/@CarvingStillness" target="_blank">유튜브: Carving Stillness</a>
+    <a href="https://www.youtube.com/@CarvingStillness" target="_blank">유튜브: Carving Stillness</a><br>
+    <span style="font-size:0.65rem; letter-spacing:0.1em; opacity:0.6;">v1.2 · 2026.05.18</span>
   </p>
 </footer>
 
@@ -554,6 +788,50 @@ const DAILY_WORDS = [
   const index = dayOfYear % DAILY_WORDS.length;
   document.getElementById('daily-text').textContent = DAILY_WORDS[index];
 })();
+
+// ── 소개 섹션 토글 ──
+function toggleAbout() {
+  const content = document.getElementById('about-content');
+  const arrow = document.getElementById('about-arrow');
+  content.classList.toggle('visible');
+  arrow.classList.toggle('open');
+}
+
+// ── 별점 ──
+const STAR_MSGS = ['', '마음에 담아두겠습니다.', '조금 더 다듬겠습니다.', '함께해 주셔서 감사합니다.', '이 공간이 도움이 되어 기쁩니다.', '깎아내면 남는 것이 진짜입니다. 고맙습니다.'];
+
+function rateStar(n) {
+  const stars = document.querySelectorAll('.star');
+  stars.forEach((s, i) => s.classList.toggle('active', i < n));
+  document.getElementById('star-msg').textContent = STAR_MSGS[n];
+}
+
+// ── 공유 ──
+function shareKakao() {
+  const url = 'https://sontop-sangdam.vercel.app';
+  const kakaoUrl = `https://sharer.kakao.com/talk/friends/picker/link?app_key=none&url=${encodeURIComponent(url)}`;
+  // 카카오 SDK 없이 간단히 클립보드 + 안내
+  const text = `손톱서점 마음방 — 지금 이것\n철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간\n\n${url}`;
+  if (navigator.share) {
+    navigator.share({ title: '손톱서점 마음방', text: '철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간', url });
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      alert('링크가 복사됐습니다. 카카오톡에 붙여넣기 해주세요! 📋');
+    });
+  }
+}
+
+function copyLink() {
+  const url = 'https://sontop-sangdam.vercel.app';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.share-btn.link');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ 복사됐습니다';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    alert('주소: https://sontop-sangdam.vercel.app');
+  });
+}
 
 let currentMode = null;
 
