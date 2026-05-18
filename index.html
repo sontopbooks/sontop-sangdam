@@ -84,9 +84,10 @@
     font-family: var(--sans);
     font-size: 1rem;
     color: var(--ink-ghost);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     line-height: 2;
     font-weight: 300;
+    word-break: keep-all;
   }
 
   .header-divider {
@@ -116,6 +117,34 @@
     border-left: 2px solid var(--wood-light);
     border-right: 2px solid var(--wood-light);
     background: var(--paper-warm);
+  }
+
+  .daily-word {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 1.75rem 2rem;
+    background: var(--paper-warm);
+    border-left: 2px solid var(--wood-light);
+    border-right: 2px solid var(--wood-light);
+  }
+
+  .daily-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--wood);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .daily-text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 2;
+    word-break: keep-all;
   }
 
   /* ── 모드 선택 버튼 ── */
@@ -377,16 +406,16 @@
   <h1>지금 이것</h1>
   <div class="header-divider"></div>
   <p class="subtitle">
-    철학으로 보고 &nbsp;·&nbsp; 명상으로 들어가고 &nbsp;·&nbsp; 질문으로 깨어나는 공간
+    <nobr>철학으로 보고</nobr> &nbsp;·&nbsp; <nobr>명상으로 들어가고</nobr> &nbsp;·&nbsp; <nobr>질문으로 깨어나는 공간</nobr>
   </p>
 </header>
 
 <main>
 
-  <div class="intro-quote">
-    목수는 나무를 깎으며 본질을 찾는다.<br>
-    당신의 마음도, 깎아내면 남는 것이 있다.<br>
-    지금 이 자리에서 그것을 함께 들여다봅니다.
+  <!-- 오늘의 한마디 -->
+  <div class="daily-word" id="daily-word">
+    <span class="daily-label">오늘의 한마디</span>
+    <p class="daily-text" id="daily-text"></p>
   </div>
 
   <!-- 모드 선택 -->
@@ -485,6 +514,47 @@
 </footer>
 
 <script>
+// ── 오늘의 한마디 (날짜별 자동 교체) ──
+const DAILY_WORDS = [
+  "깎아내면 남는 것이 진짜입니다.",
+  "지금 이것. 이것으로 충분합니다.",
+  "나무는 서두르지 않아도 자랍니다.",
+  "붙잡고 있는 것이 나를 붙잡고 있습니다.",
+  "온전한 나는 멀리 있지 않습니다. 지금 여기입니다.",
+  "느리게 가는 것이 가장 빠른 길일 때가 있습니다.",
+  "목수는 더하지 않습니다. 없애서 본질을 드러냅니다.",
+  "방생은 포기가 아닙니다. 본래 자리로 돌려보내는 것입니다.",
+  "해는 애쓰지 않아도 뜹니다. 당신도 그렇습니다.",
+  "렌즈를 바꾸면 같은 풍경이 달라집니다.",
+  "된장은 서두르면 맛이 없습니다. 지금 익어가고 있습니다.",
+  "당기면 당길수록 더 멀리 갑니다. 지금 이 저항이 도약의 준비입니다.",
+  "80억 촛불이 하나의 바탕에서 빛납니다. 당신의 빛도 그 안에 있습니다.",
+  "단순하게. 덧붙이지 않는 것이 충만함입니다.",
+  "지금 멈춘 건가요, 쉬는 건가요?",
+  "껍데기를 깎아내면 본래의 나가 드러납니다.",
+  "자유는 얻는 것이 아니라 드러나는 것입니다.",
+  "그냥 알고, 그대로 받아들일 수 있습니다.",
+  "나무 안에 이미 새가 있었습니다.",
+  "놓아주면 무엇이 시작될까요?",
+  "지금 이 고요함 속에서 당신은 무엇을 듣고 있습니까?",
+  "작은 것이 세상을 바꿉니다.",
+  "멈추지 않으면 실개천도 바다입니다.",
+  "완성은 손에서 떠날 때입니다.",
+  "애쓰는 것과 존재하는 것은 다릅니다.",
+  "지금 당신의 마음은 흐르고 있습니까?",
+  "깎고, 쉬고, 웃고. 그것으로 충분합니다.",
+  "이미 그러합니다. 새로 얻을 필요가 없습니다.",
+  "지금 이 자리가 본래의 자리입니다.",
+  "손톱만 한 서점에서, 마음만 한 이야기를 나눕니다."
+];
+
+(function() {
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const index = dayOfYear % DAILY_WORDS.length;
+  document.getElementById('daily-text').textContent = DAILY_WORDS[index];
+})();
+
 let currentMode = null;
 
 function selectMode(mode) {
