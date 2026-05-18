@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>손톱서점 마음방 — 철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간</title>
+<title>손톱서점 마음방 — 지금 이것</title>
 <meta name="description" content="목수·시인·코치·명상가 웃네의 252편 수필을 바탕으로, 당신의 고민에 철학적 통찰과 코칭 질문을 건네는 성찰 공간입니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,14 +22,11 @@
     --wood-light: #c4a882;
     --wood-pale: #ede4d8;
     --sage: #6b7c6b;
-    --sage-light: #d4ddd4;
     --accent: #5c3d2e;
     --serif: 'Noto Serif KR', Georgia, serif;
     --sans: 'Noto Sans KR', sans-serif;
     --radius: 2px;
   }
-
-  html { scroll-behavior: smooth; }
 
   body {
     font-family: var(--serif);
@@ -39,24 +36,15 @@
     line-height: 1.8;
   }
 
-  /* 나뭇결 배경 텍스처 */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image:
-      repeating-linear-gradient(
-        175deg,
-        transparent 0px,
-        transparent 48px,
-        rgba(139,111,78,0.015) 49px,
-        rgba(139,111,78,0.015) 50px
-      );
+    background-image: repeating-linear-gradient(175deg, transparent 0px, transparent 48px, rgba(139,111,78,0.015) 49px, rgba(139,111,78,0.015) 50px);
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ── 헤더 ── */
   header {
     position: relative;
     text-align: center;
@@ -69,16 +57,15 @@
   .brand-mark {
     display: inline-block;
     font-family: var(--serif);
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     letter-spacing: 0.4em;
     color: var(--wood);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
-    font-weight: 300;
+    font-weight: 400;
   }
 
-  .brand-mark::before,
-  .brand-mark::after {
+  .brand-mark::before, .brand-mark::after {
     content: '—';
     margin: 0 0.5rem;
     opacity: 0.5;
@@ -86,9 +73,8 @@
 
   h1 {
     font-family: var(--serif);
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(2.4rem, 6vw, 4rem);
     font-weight: 300;
-    letter-spacing: -0.01em;
     color: var(--ink);
     margin-bottom: 0.75rem;
     line-height: 1.3;
@@ -96,7 +82,7 @@
 
   .subtitle {
     font-family: var(--sans);
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--ink-ghost);
     letter-spacing: 0.08em;
     line-height: 2;
@@ -110,7 +96,6 @@
     margin: 1.5rem auto;
   }
 
-  /* ── 메인 컨테이너 ── */
   main {
     position: relative;
     max-width: 720px;
@@ -119,7 +104,6 @@
     z-index: 1;
   }
 
-  /* ── 안내 문구 ── */
   .intro-quote {
     text-align: center;
     font-family: var(--serif);
@@ -134,17 +118,72 @@
     background: var(--paper-warm);
   }
 
-  /* ── 입력 영역 ── */
-  .input-section {
-    margin-bottom: 2rem;
+  /* ── 모드 선택 버튼 ── */
+  .mode-section {
+    margin-bottom: 1.5rem;
   }
+
+  .mode-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .mode-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .mode-btn {
+    padding: 1rem 1.25rem;
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 400;
+    border: 1px solid var(--paper-dark);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .mode-btn:hover {
+    border-color: var(--wood-light);
+    color: var(--ink);
+  }
+
+  .mode-btn.active-warm {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  .mode-btn.active-sharp {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .mode-btn .mode-icon { font-size: 1.2rem; display: block; margin-bottom: 0.25rem; }
+  .mode-btn .mode-name { font-weight: 500; display: block; }
+  .mode-btn .mode-desc { font-size: 0.75rem; opacity: 0.8; display: block; font-family: var(--sans); }
+
+  /* ── 입력 영역 ── */
+  .input-section { margin-bottom: 1rem; }
 
   .input-label {
     display: block;
     font-family: var(--sans);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    color: var(--ink-ghost);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
     margin-bottom: 0.75rem;
     font-weight: 400;
   }
@@ -166,17 +205,9 @@
     line-height: 1.9;
   }
 
-  textarea:focus {
-    border-color: var(--wood-light);
-  }
+  textarea:focus { border-color: var(--wood-light); }
+  textarea::placeholder { color: var(--ink-ghost); font-style: italic; font-weight: 300; }
 
-  textarea::placeholder {
-    color: var(--ink-ghost);
-    font-style: italic;
-    font-weight: 300;
-  }
-
-  /* ── 버튼 ── */
   .submit-btn {
     display: block;
     width: 100%;
@@ -196,68 +227,42 @@
 
   .submit-btn:hover { background: var(--wood); }
   .submit-btn:active { transform: scale(0.995); }
-  .submit-btn:disabled {
-    background: var(--paper-dark);
-    color: var(--ink-ghost);
-    cursor: not-allowed;
-  }
+  .submit-btn:disabled { background: var(--paper-dark); color: var(--ink-ghost); cursor: not-allowed; }
+
+  .submit-btn.mode-warm { background: var(--sage); }
+  .submit-btn.mode-warm:hover { background: #556655; }
+  .submit-btn.mode-sharp { background: var(--accent); }
+  .submit-btn.mode-sharp:hover { background: var(--wood); }
 
   /* ── 로딩 ── */
-  .loading {
-    display: none;
-    text-align: center;
-    padding: 3rem 0;
-    color: var(--ink-ghost);
-  }
-
+  .loading { display: none; text-align: center; padding: 3rem 0; color: var(--ink-ghost); }
   .loading.visible { display: block; }
-
-  .loading-dots {
-    display: inline-flex;
-    gap: 6px;
-    margin-bottom: 1rem;
-  }
-
-  .loading-dots span {
-    width: 6px;
-    height: 6px;
-    background: var(--wood-light);
-    border-radius: 50%;
-    animation: breathe 1.6s ease-in-out infinite;
-  }
-
+  .loading-dots { display: inline-flex; gap: 6px; margin-bottom: 1rem; }
+  .loading-dots span { width: 6px; height: 6px; background: var(--wood-light); border-radius: 50%; animation: breathe 1.6s ease-in-out infinite; }
   .loading-dots span:nth-child(2) { animation-delay: 0.3s; }
   .loading-dots span:nth-child(3) { animation-delay: 0.6s; }
-
-  @keyframes breathe {
-    0%, 100% { opacity: 0.2; transform: scale(0.85); }
-    50% { opacity: 1; transform: scale(1); }
-  }
-
-  .loading-text {
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    font-weight: 300;
-  }
+  @keyframes breathe { 0%, 100% { opacity: 0.2; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1); } }
+  .loading-text { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 300; }
 
   /* ── 답변 영역 ── */
-  .response-section {
-    display: none;
-    margin-top: 3rem;
-    border-top: 1px solid var(--paper-dark);
-    padding-top: 3rem;
-    animation: fadeIn 0.8s ease;
-  }
-
+  .response-section { display: none; margin-top: 3rem; border-top: 1px solid var(--paper-dark); padding-top: 3rem; animation: fadeIn 0.8s ease; }
   .response-section.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+  .mode-badge {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    font-weight: 400;
   }
 
-  /* 단계 라벨 */
+  .mode-badge.warm { background: var(--sage); color: white; }
+  .mode-badge.sharp { background: var(--accent); color: white; }
+
   .step-label {
     font-family: var(--sans);
     font-size: 0.65rem;
@@ -270,17 +275,9 @@
     gap: 0.75rem;
   }
 
-  .step-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--paper-dark);
-  }
+  .step-label::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
 
-  /* 답변 블록 */
-  .response-block {
-    margin-bottom: 3rem;
-  }
+  .response-block { margin-bottom: 3rem; }
 
   .response-text {
     font-family: var(--serif);
@@ -291,7 +288,6 @@
     white-space: pre-wrap;
   }
 
-  /* 코칭 질문 블록 */
   .coaching-block {
     background: var(--paper-warm);
     border-left: 3px solid var(--wood);
@@ -299,36 +295,44 @@
     border-radius: 0 var(--radius) var(--radius) 0;
   }
 
-  .coaching-block .response-text {
-    color: var(--ink);
-    font-size: 1.05rem;
-    font-weight: 400;
-    font-style: italic;
-  }
+  .coaching-block .response-text { color: var(--ink); font-size: 1.05rem; font-weight: 400; font-style: italic; }
 
-  /* 위기 안내 */
+  /* ── 위기 안내 ── */
   .crisis-block {
+    display: none;
     background: #fdf5f0;
     border: 1px solid #e8c8b8;
     border-radius: var(--radius);
-    padding: 1.5rem 1.75rem;
-    margin-top: 1rem;
+    padding: 2rem 2rem;
+    margin-top: 2rem;
+    animation: fadeIn 0.8s ease;
   }
 
-  .crisis-block p {
+  .crisis-block.visible { display: block; }
+
+  .crisis-message {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 2.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .crisis-numbers {
     font-family: var(--sans);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--ink-soft);
-    line-height: 1.9;
-    margin-bottom: 0.5rem;
+    line-height: 2.2;
+    padding: 1rem 1.25rem;
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--paper-dark);
   }
 
-  .crisis-block strong {
-    color: var(--accent);
-  }
+  .crisis-numbers strong { color: var(--accent); font-size: 1rem; }
 
-  /* 다시 쓰기 버튼 */
   .reset-btn {
     display: inline-block;
     margin-top: 2.5rem;
@@ -344,73 +348,25 @@
     transition: all 0.2s;
   }
 
-  .reset-btn:hover {
-    border-color: var(--wood-light);
-    color: var(--ink-soft);
-  }
+  .reset-btn:hover { border-color: var(--wood-light); color: var(--ink-soft); }
 
-  /* ── 에러 ── */
-  .error-block {
-    display: none;
-    background: #fdf5f0;
-    border: 1px solid #e8c8b8;
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    margin-top: 1.5rem;
-  }
-
+  .error-block { display: none; background: #fdf5f0; border: 1px solid #e8c8b8; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
   .error-block.visible { display: block; }
+  .error-block p { font-family: var(--sans); font-size: 0.82rem; color: #8b4a2e; line-height: 1.8; }
 
-  .error-block p {
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    color: #8b4a2e;
-    line-height: 1.8;
-  }
+  .disclaimer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--paper-dark); font-family: var(--sans); font-size: 0.72rem; color: var(--ink-ghost); line-height: 1.9; text-align: center; }
 
-  /* ── 면책 고지 ── */
-  .disclaimer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--paper-dark);
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--ink-ghost);
-    line-height: 1.9;
-    text-align: center;
-  }
-
-  /* ── 푸터 ── */
-  footer {
-    position: relative;
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid var(--paper-dark);
-    background: var(--paper-warm);
-    z-index: 1;
-  }
-
-  footer p {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    color: var(--ink-ghost);
-    letter-spacing: 0.08em;
-    font-weight: 300;
-    line-height: 2.2;
-  }
-
-  footer a {
-    color: var(--wood);
-    text-decoration: none;
-  }
-
+  footer { position: relative; text-align: center; padding: 2rem; border-top: 1px solid var(--paper-dark); background: var(--paper-warm); z-index: 1; }
+  footer p { font-family: var(--sans); font-size: 0.7rem; color: var(--ink-ghost); letter-spacing: 0.08em; font-weight: 300; line-height: 2.2; }
+  footer a { color: var(--wood); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
-  /* ── 반응형 ── */
   @media (max-width: 600px) {
     header { padding: 3.5rem 1.5rem 2rem; }
     main { padding: 2rem 1.25rem 4rem; }
     h1 { font-size: 1.6rem; }
+    .mode-buttons { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .mode-btn { padding: 0.75rem 0.5rem; font-size: 0.82rem; }
   }
 </style>
 </head>
@@ -433,6 +389,24 @@
     지금 이 자리에서 그것을 함께 들여다봅니다.
   </div>
 
+  <!-- 모드 선택 -->
+  <div class="mode-section">
+    <label class="mode-label">오늘 어떤 방식으로 들어가고 싶으신가요? <span style="color:var(--wood)">둘 중 하나를 먼저 선택하세요</span></label>
+    <div class="mode-buttons">
+      <button class="mode-btn" id="btn-warm" onclick="selectMode('warm')">
+        <span class="mode-icon">🌿</span>
+        <span class="mode-name">따뜻하게</span>
+        <span class="mode-desc">공감과 위로가 필요할 때</span>
+      </button>
+      <button class="mode-btn" id="btn-sharp" onclick="selectMode('sharp')">
+        <span class="mode-icon">🎋</span>
+        <span class="mode-name">뼈때리게</span>
+        <span class="mode-desc">직설적인 통찰이 필요할 때</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 입력 -->
   <div class="input-section">
     <label class="input-label" for="user-input">지금 마음에 있는 것을 털어놓으세요</label>
     <textarea
@@ -440,7 +414,7 @@
       placeholder="요즘 어떤 마음이 당신을 붙잡고 있나요? 작은 것도 괜찮습니다. 그대로 적어주세요."
       maxlength="1000"
     ></textarea>
-    <button class="submit-btn" id="submit-btn" onclick="sendMessage()">
+    <button class="submit-btn mode-warm" id="submit-btn" onclick="sendMessage()" disabled>
       마음방으로 들어가기
     </button>
   </div>
@@ -450,26 +424,24 @@
   </div>
 
   <div class="loading" id="loading">
-    <div class="loading-dots">
-      <span></span><span></span><span></span>
-    </div>
-    <p class="loading-text">나무 깎듯 천천히, 마음을 들여다보고 있습니다</p>
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+    <p class="loading-text" id="loading-text">나무 깎듯 천천히, 마음을 들여다보고 있습니다</p>
   </div>
 
+  <!-- 답변 -->
   <div class="response-section" id="response-section">
-    <!-- 1단계 -->
+    <div id="mode-badge" class="mode-badge warm">🌿 따뜻하게</div>
+
     <div class="response-block">
-      <div class="step-label">철학적 통찰</div>
+      <div class="step-label" id="label-insight">철학적 통찰</div>
       <div class="response-text" id="insight-text"></div>
     </div>
 
-    <!-- 2단계 -->
     <div class="response-block">
-      <div class="step-label">명상적 접근</div>
+      <div class="step-label" id="label-meditation">명상적 접근</div>
       <div class="response-text" id="meditation-text"></div>
     </div>
 
-    <!-- 3단계 -->
     <div class="response-block">
       <div class="step-label">오늘의 질문</div>
       <div class="coaching-block">
@@ -477,19 +449,22 @@
       </div>
     </div>
 
-    <button class="reset-btn" onclick="resetForm()">
-      다른 이야기 꺼내기
-    </button>
+    <button class="reset-btn" onclick="resetForm()">다른 이야기 꺼내기</button>
   </div>
 
-  <!-- 위기 안내 (기본 숨김) -->
-  <div class="crisis-block" id="crisis-block" style="display:none;">
-    <p>지금 많이 힘드신 것 같아 먼저 말씀드립니다.</p>
-    <p>
-      <strong>자살예방상담전화 1393</strong> (24시간)<br>
-      <strong>정신건강위기상담전화 1577-0199</strong> (24시간)
+  <!-- 위기 안내 -->
+  <div class="crisis-block" id="crisis-block">
+    <p class="crisis-message">
+      지금 많이 힘드신 것 같아 먼저 말씀드립니다.<br>
+      그 외로움과 무게, 혼자 감당하지 않아도 됩니다.<br>
+      지금 이 고통이 너무 벅차다면, 이 손을 잡아주세요.
     </p>
-    <p>전화 한 통이 어렵다면, 지금 가장 가까운 사람에게 연락해 주세요.</p>
+    <div class="crisis-numbers">
+      <strong>자살예방상담전화 1393</strong> (24시간, 무료)<br>
+      <strong>정신건강위기상담전화 1577-0199</strong> (24시간)<br><br>
+      전화가 어렵다면, 지금 가장 가까운 사람에게 연락해 주세요.
+    </div>
+    <button class="reset-btn" onclick="resetForm()" style="margin-top:1.5rem;">처음으로 돌아가기</button>
   </div>
 
   <div class="disclaimer">
@@ -510,20 +485,38 @@
 </footer>
 
 <script>
-// ── API 호출 (/api/chat 서버리스 함수 경유) ──
+let currentMode = null;
+
+function selectMode(mode) {
+  currentMode = mode;
+  const btnWarm = document.getElementById('btn-warm');
+  const btnSharp = document.getElementById('btn-sharp');
+  const submitBtn = document.getElementById('submit-btn');
+
+  btnWarm.className = 'mode-btn';
+  btnSharp.className = 'mode-btn';
+
+  if (mode === 'warm') {
+    btnWarm.classList.add('active-warm');
+    submitBtn.className = 'submit-btn mode-warm';
+    document.getElementById('loading-text').textContent = '나무 깎듯 천천히, 마음을 들여다보고 있습니다';
+  } else {
+    btnSharp.classList.add('active-sharp');
+    submitBtn.className = 'submit-btn mode-sharp';
+    document.getElementById('loading-text').textContent = '죽비를 들어 핵심을 찾고 있습니다';
+  }
+
+  // 버튼 활성화
+  submitBtn.disabled = false;
+}
+
 async function sendMessage() {
   const input = document.getElementById('user-input');
   const userMessage = input.value.trim();
 
-  if (!userMessage) {
-    showError('마음에 있는 이야기를 먼저 적어주세요.');
-    return;
-  }
-
-  if (userMessage.length < 5) {
-    showError('조금 더 이야기해 주세요.');
-    return;
-  }
+  if (!currentMode) { showError('먼저 위에서 따뜻하게 또는 뼈때리게를 선택해 주세요.'); return; }
+  if (!userMessage) { showError('마음에 있는 이야기를 먼저 적어주세요.'); return; }
+  if (userMessage.length < 5) { showError('조금 더 이야기해 주세요.'); return; }
 
   hideError();
   hideResponse();
@@ -535,14 +528,12 @@ async function sendMessage() {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userMessage })
+      body: JSON.stringify({ message: userMessage, mode: currentMode })
     });
 
     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.error || `HTTP_${response.status}`);
-    }
+    if (!response.ok) throw new Error(data.error || `HTTP_${response.status}`);
 
     showLoading(false);
 
@@ -555,17 +546,29 @@ async function sendMessage() {
   } catch (err) {
     showLoading(false);
     setSubmitDisabled(false);
-
     if (err.message.includes('429')) {
-      showError('잠시 후 다시 시도해 주세요. 요청이 너무 많습니다.');
+      showError('잠시 후 다시 시도해 주세요.');
     } else {
       showError('연결에 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
     }
   }
 }
 
-// ── UI 헬퍼 ──
 function showResponse(data) {
+  // 모드 배지
+  const badge = document.getElementById('mode-badge');
+  if (currentMode === 'warm') {
+    badge.className = 'mode-badge warm';
+    badge.textContent = '🌿 따뜻하게';
+    document.getElementById('label-insight').textContent = '철학적 통찰';
+    document.getElementById('label-meditation').textContent = '명상적 접근';
+  } else {
+    badge.className = 'mode-badge sharp';
+    badge.textContent = '🪚 뼈때리게';
+    document.getElementById('label-insight').textContent = '직설적 통찰';
+    document.getElementById('label-meditation').textContent = '핵심 지적';
+  }
+
   document.getElementById('insight-text').textContent = data.insight || '';
   document.getElementById('meditation-text').textContent = data.meditation || '';
   document.getElementById('coaching-text').textContent = data.coaching || '';
@@ -573,52 +576,35 @@ function showResponse(data) {
   document.getElementById('response-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function hideResponse() {
-  document.getElementById('response-section').classList.remove('visible');
-}
+function hideResponse() { document.getElementById('response-section').classList.remove('visible'); }
 
 function showCrisis() {
-  document.getElementById('crisis-block').style.display = 'block';
+  document.getElementById('crisis-block').classList.add('visible');
   document.getElementById('crisis-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
   setSubmitDisabled(false);
 }
 
-function hideCrisis() {
-  document.getElementById('crisis-block').style.display = 'none';
-}
-
-function showLoading(show) {
-  document.getElementById('loading').classList.toggle('visible', show);
-}
-
-function showError(msg) {
-  document.getElementById('error-text').textContent = msg;
-  document.getElementById('error-block').classList.add('visible');
-}
-
-function hideError() {
-  document.getElementById('error-block').classList.remove('visible');
-}
-
-function setSubmitDisabled(disabled) {
-  document.getElementById('submit-btn').disabled = disabled;
-}
+function hideCrisis() { document.getElementById('crisis-block').classList.remove('visible'); }
+function showLoading(show) { document.getElementById('loading').classList.toggle('visible', show); }
+function showError(msg) { document.getElementById('error-text').textContent = msg; document.getElementById('error-block').classList.add('visible'); }
+function hideError() { document.getElementById('error-block').classList.remove('visible'); }
+function setSubmitDisabled(disabled) { document.getElementById('submit-btn').disabled = disabled; }
 
 function resetForm() {
   document.getElementById('user-input').value = '';
   hideResponse();
   hideCrisis();
   hideError();
-  setSubmitDisabled(false);
+  setSubmitDisabled(true);
+  currentMode = null;
+  document.getElementById('btn-warm').className = 'mode-btn';
+  document.getElementById('btn-sharp').className = 'mode-btn';
+  document.getElementById('submit-btn').className = 'submit-btn mode-warm';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('user-input').focus();
 }
 
-// 엔터(Ctrl+Enter) 단축키
 document.getElementById('user-input').addEventListener('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-    sendMessage();
-  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendMessage();
 });
 </script>
 
