@@ -919,7 +919,7 @@ function clearStorage() {
 // ── 페이지 로드 시 이전 대화 복원 ──
 window.addEventListener('DOMContentLoaded', function() {
   const saved = loadFromStorage();
-  if (!saved || saved.turnCount === 0) return;
+  if (!saved || saved.turnCount === 0 || !saved.chatHistory || saved.chatHistory.length === 0) return;
 
   currentMode = saved.currentMode;
   chatHistory = saved.chatHistory;
