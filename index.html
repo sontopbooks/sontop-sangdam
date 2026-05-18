@@ -392,6 +392,107 @@
   .share-btn.kakao { background: #FEE500; color: #3A1D1D; }
   .share-btn.link { background: var(--paper-warm); color: var(--ink-soft); border: 1px solid var(--paper-dark); }
 
+  /* ── 대화 히스토리 ── */
+  .chat-history {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .chat-turn {
+    border-top: 1px solid var(--paper-dark);
+    padding-top: 2rem;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .chat-user-msg {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--ink-ghost);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper-warm);
+    border-radius: var(--radius);
+    word-break: keep-all;
+  }
+
+  .chat-user-msg::before {
+    content: '"';
+    color: var(--wood-light);
+    font-size: 1.2rem;
+    margin-right: 0.2rem;
+  }
+
+  .chat-user-msg::after {
+    content: '"';
+    color: var(--wood-light);
+    font-size: 1.2rem;
+    margin-left: 0.2rem;
+  }
+
+  /* ── 대화 이어가기 ── */
+  .continue-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .continue-count {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--wood-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .continue-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 1rem 1.25rem;
+    font-family: var(--serif);
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-dark);
+    border-radius: var(--radius);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+    line-height: 1.9;
+  }
+
+  .continue-textarea:focus { border-color: var(--wood-light); }
+
+  .continue-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ── 3회 제한 ── */
+  .limit-block {
+    margin-top: 2rem;
+    padding: 1.75rem;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--wood-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .limit-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 2;
+    margin-bottom: 0.5rem;
+  }
+
   /* ── 위기 안내 ── */
   .crisis-block {
     display: none;
@@ -609,8 +710,8 @@
   </div>
 
   <!-- 입력 -->
-  <div class="input-section">
-    <label class="input-label" for="user-input">지금 마음에 있는 것을 털어놓으세요</label>
+  <div class="input-section" id="input-section">
+    <label class="input-label" for="user-input" id="input-label">지금 마음에 있는 것을 털어놓으세요</label>
     <textarea
       id="user-input"
       placeholder="요즘 어떤 마음이 당신을 붙잡고 있나요? 작은 것도 괜찮습니다. 그대로 적어주세요."
@@ -621,11 +722,46 @@
     </button>
   </div>
 
-  <div class="error-block" id="error-block">
+  <!-- 대화 히스토리 -->
+  <div class="chat-history" id="chat-history"></div>
+
+  <!-- 대화 이어가기 입력창 (첫 답변 후 표시) -->
+  <div class="continue-section" id="continue-section" style="display:none;">
+    <div class="continue-count" id="continue-count"></div>
+    <textarea
+      id="continue-input"
+      class="continue-textarea"
+      placeholder="이 질문에 대해 더 이야기해 주세요..."
+      maxlength="1000"
+    ></textarea>
+    <div class="continue-buttons">
+      <button class="submit-btn" id="continue-btn" onclick="continueChat()"
+        style="background:var(--wood);">
+        계속 이야기하기
+      </button>
+      <button class="reset-btn" onclick="resetForm()" style="margin-top:0;">
+        새 이야기 시작
+      </button>
+    </div>
+  </div>
+
+  <!-- 3회 제한 안내 -->
+  <div class="limit-block" id="limit-block" style="display:none;">
+    <p class="limit-text">
+      오늘 나눔이 깊어졌습니다.<br>
+      더 깊은 이야기는 뉴스레터에서 이어집니다.
+    </p>
+    <a href="#" class="share-btn kakao" style="display:flex;text-decoration:none;margin-top:1rem;">
+      📮 오마카세 성찰 레터 구독하기
+    </a>
+    <button class="reset-btn" onclick="resetForm()" style="margin-top:0.75rem;">
+      새 이야기 시작
+    </button>
+  </div>
     <p id="error-text"></p>
   </div>
 
-  <div class="loading" id="loading">
+  <div class="error-block" id="error-block">
     <div class="loading-dots"><span></span><span></span><span></span></div>
     <p class="loading-text" id="loading-text">나무 깎듯 천천히, 마음을 들여다보고 있습니다</p>
   </div>
@@ -748,102 +884,98 @@
 </footer>
 
 <script>
-// ── 오늘의 한마디 (날짜별 자동 교체) ──
-const DAILY_WORDS = [
-  "깎아내면 남는 것이 진짜입니다.",
-  "지금 이것. 이것으로 충분합니다.",
-  "나무는 서두르지 않아도 자랍니다.",
-  "붙잡고 있는 것이 나를 붙잡고 있습니다.",
-  "온전한 나는 멀리 있지 않습니다. 지금 여기입니다.",
-  "느리게 가는 것이 가장 빠른 길일 때가 있습니다.",
-  "목수는 더하지 않습니다. 없애서 본질을 드러냅니다.",
-  "방생은 포기가 아닙니다. 본래 자리로 돌려보내는 것입니다.",
-  "해는 애쓰지 않아도 뜹니다. 당신도 그렇습니다.",
-  "렌즈를 바꾸면 같은 풍경이 달라집니다.",
-  "된장은 서두르면 맛이 없습니다. 지금 익어가고 있습니다.",
-  "당기면 당길수록 더 멀리 갑니다. 지금 이 저항이 도약의 준비입니다.",
-  "80억 촛불이 하나의 바탕에서 빛납니다. 당신의 빛도 그 안에 있습니다.",
-  "단순하게. 덧붙이지 않는 것이 충만함입니다.",
-  "지금 멈춘 건가요, 쉬는 건가요?",
-  "껍데기를 깎아내면 본래의 나가 드러납니다.",
-  "자유는 얻는 것이 아니라 드러나는 것입니다.",
-  "그냥 알고, 그대로 받아들일 수 있습니다.",
-  "나무 안에 이미 새가 있었습니다.",
-  "놓아주면 무엇이 시작될까요?",
-  "지금 이 고요함 속에서 당신은 무엇을 듣고 있습니까?",
-  "작은 것이 세상을 바꿉니다.",
-  "멈추지 않으면 실개천도 바다입니다.",
-  "완성은 손에서 떠날 때입니다.",
-  "애쓰는 것과 존재하는 것은 다릅니다.",
-  "지금 당신의 마음은 흐르고 있습니까?",
-  "깎고, 쉬고, 웃고. 그것으로 충분합니다.",
-  "이미 그러합니다. 새로 얻을 필요가 없습니다.",
-  "지금 이 자리가 본래의 자리입니다.",
-  "손톱만 한 서점에서, 마음만 한 이야기를 나눕니다."
-];
-
-(function() {
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-  const index = dayOfYear % DAILY_WORDS.length;
-  document.getElementById('daily-text').textContent = DAILY_WORDS[index];
-})();
-
-// ── 소개 섹션 토글 ──
-function toggleAbout() {
-  const content = document.getElementById('about-content');
-  const arrow = document.getElementById('about-arrow');
-  content.classList.toggle('visible');
-  arrow.classList.toggle('open');
-}
-
-// ── 별점 ──
-const STAR_MSGS = ['', '마음에 담아두겠습니다.', '조금 더 다듬겠습니다.', '함께해 주셔서 감사합니다.', '이 공간이 도움이 되어 기쁩니다.', '깎아내면 남는 것이 진짜입니다. 고맙습니다.'];
-
-function rateStar(n) {
-  const stars = document.querySelectorAll('.star');
-  stars.forEach((s, i) => s.classList.toggle('active', i < n));
-  document.getElementById('star-msg').textContent = STAR_MSGS[n];
-}
-
-// ── 공유 ──
-function shareKakao() {
-  const url = 'https://sontop-sangdam.vercel.app';
-  const kakaoUrl = `https://sharer.kakao.com/talk/friends/picker/link?app_key=none&url=${encodeURIComponent(url)}`;
-  // 카카오 SDK 없이 간단히 클립보드 + 안내
-  const text = `손톱서점 마음방 — 지금 이것\n철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간\n\n${url}`;
-  if (navigator.share) {
-    navigator.share({ title: '손톱서점 마음방', text: '철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간', url });
-  } else {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('링크가 복사됐습니다. 카카오톡에 붙여넣기 해주세요! 📋');
-    });
-  }
-}
-
-function copyLink() {
-  const url = 'https://sontop-sangdam.vercel.app';
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.querySelector('.share-btn.link');
-    const orig = btn.innerHTML;
-    btn.innerHTML = '✅ 복사됐습니다';
-    setTimeout(() => { btn.innerHTML = orig; }, 2000);
-  }).catch(() => {
-    alert('주소: https://sontop-sangdam.vercel.app');
-  });
-}
-
 let currentMode = null;
+let chatHistory = [];
+let turnCount = 0;
+const MAX_TURNS = 5;
+const STORAGE_KEY = 'sontop_chat';
+const EXPIRE_MIN = 30;
+
+// ── localStorage 저장/불러오기 ──
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      currentMode, chatHistory, turnCount,
+      savedAt: Date.now()
+    }));
+  } catch(e) {}
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    const elapsed = (Date.now() - data.savedAt) / 60000;
+    if (elapsed > EXPIRE_MIN) { localStorage.removeItem(STORAGE_KEY); return false; }
+    return data;
+  } catch(e) { return false; }
+}
+
+function clearStorage() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+}
+
+// ── 페이지 로드 시 이전 대화 복원 ──
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = loadFromStorage();
+  if (!saved || saved.turnCount === 0) return;
+
+  currentMode = saved.currentMode;
+  chatHistory = saved.chatHistory;
+  turnCount = saved.turnCount;
+
+  // 입력창 숨기기
+  document.getElementById('input-section').style.display = 'none';
+
+  // 모드 버튼 복원
+  if (currentMode) {
+    document.getElementById('btn-warm').className = 'mode-btn' + (currentMode === 'warm' ? ' active-warm' : '');
+    document.getElementById('btn-sharp').className = 'mode-btn' + (currentMode === 'sharp' ? ' active-sharp' : '');
+  }
+
+  // 대화 히스토리 복원 — 텍스트만 간단히 표시
+  const history = document.getElementById('chat-history');
+  const pairs = [];
+  for (let i = 0; i < chatHistory.length - 1; i += 2) {
+    if (chatHistory[i] && chatHistory[i+1]) {
+      pairs.push({ user: chatHistory[i].content, ai: chatHistory[i+1].content });
+    }
+  }
+
+  pairs.forEach(function(pair, idx) {
+    const isWarm = currentMode === 'warm';
+    const turn = document.createElement('div');
+    turn.className = 'chat-turn';
+    const lines = pair.ai.split('\n').filter(function(l) { return l.trim(); });
+    const insight = lines[0] || '';
+    const meditation = lines[1] || '';
+    const coaching = lines[2] || '';
+    turn.innerHTML =
+      '<div class="chat-user-msg">' + escapeHtml(pair.user) + '</div>' +
+      '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
+      '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(insight) + '</div></div>' +
+      '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(meditation) + '</div></div>' +
+      '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(coaching) + '</div></div></div>' +
+      (idx === 0 ? feedbackHTML() : '');
+    history.appendChild(turn);
+  });
+
+  // 이어가기 또는 제한 표시
+  if (turnCount >= MAX_TURNS) {
+    showLimitBlock();
+  } else {
+    showContinueSection();
+  }
+});
 
 function selectMode(mode) {
   currentMode = mode;
   const btnWarm = document.getElementById('btn-warm');
   const btnSharp = document.getElementById('btn-sharp');
   const submitBtn = document.getElementById('submit-btn');
-
   btnWarm.className = 'mode-btn';
   btnSharp.className = 'mode-btn';
-
   if (mode === 'warm') {
     btnWarm.classList.add('active-warm');
     submitBtn.className = 'submit-btn mode-warm';
@@ -853,106 +985,163 @@ function selectMode(mode) {
     submitBtn.className = 'submit-btn mode-sharp';
     document.getElementById('loading-text').textContent = '죽비를 들어 핵심을 찾고 있습니다';
   }
-
-  // 버튼 활성화
   submitBtn.disabled = false;
 }
 
 async function sendMessage() {
   const input = document.getElementById('user-input');
   const userMessage = input.value.trim();
-
   if (!currentMode) { showError('먼저 위에서 따뜻하게 또는 뼈때리게를 선택해 주세요.'); return; }
   if (!userMessage) { showError('마음에 있는 이야기를 먼저 적어주세요.'); return; }
   if (userMessage.length < 5) { showError('조금 더 이야기해 주세요.'); return; }
-
+  document.getElementById('input-section').style.display = 'none';
   hideError();
-  hideResponse();
-  hideCrisis();
   showLoading(true);
-  setSubmitDisabled(true);
+  await callAPI(userMessage);
+}
 
+async function continueChat() {
+  const input = document.getElementById('continue-input');
+  const userMessage = input.value.trim();
+  if (!userMessage || userMessage.length < 2) return;
+  input.value = '';
+  document.getElementById('continue-section').style.display = 'none';
+  showLoading(true);
+  await callAPI(userMessage);
+}
+
+async function callAPI(userMessage) {
+  chatHistory.push({ role: 'user', content: userMessage });
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userMessage, mode: currentMode })
+      body: JSON.stringify({ message: userMessage, mode: currentMode, history: chatHistory, turnCount: turnCount })
     });
-
     const data = await response.json();
-
-    if (!response.ok) throw new Error(data.error || `HTTP_${response.status}`);
-
+    if (!response.ok) throw new Error(data.error || 'HTTP_' + response.status);
     showLoading(false);
-
-    if (data.crisis) {
-      showCrisis();
-    } else {
-      showResponse(data);
-    }
-
+    if (data.crisis) { showCrisis(); return; }
+    const aiContent = (data.insight || '') + '\n' + (data.meditation || '') + '\n' + (data.coaching || '');
+    chatHistory.push({ role: 'assistant', content: aiContent });
+    turnCount++;
+    saveToStorage();
+    addChatTurn(userMessage, data);
+    if (turnCount >= MAX_TURNS) { showLimitBlock(); } else { showContinueSection(); }
   } catch (err) {
     showLoading(false);
-    setSubmitDisabled(false);
-    if (err.message.includes('429')) {
-      showError('잠시 후 다시 시도해 주세요.');
-    } else {
-      showError('연결에 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
-    }
+    document.getElementById('input-section').style.display = 'block';
+    showError('연결에 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
   }
 }
 
-function showResponse(data) {
-  // 모드 배지
-  const badge = document.getElementById('mode-badge');
-  if (currentMode === 'warm') {
-    badge.className = 'mode-badge warm';
-    badge.textContent = '🌿 따뜻하게';
-    document.getElementById('label-insight').textContent = '철학적 통찰';
-    document.getElementById('label-meditation').textContent = '명상적 접근';
-  } else {
-    badge.className = 'mode-badge sharp';
-    badge.textContent = '🪚 뼈때리게';
-    document.getElementById('label-insight').textContent = '직설적 통찰';
-    document.getElementById('label-meditation').textContent = '핵심 지적';
-  }
-
-  document.getElementById('insight-text').textContent = data.insight || '';
-  document.getElementById('meditation-text').textContent = data.meditation || '';
-  document.getElementById('coaching-text').textContent = data.coaching || '';
-  document.getElementById('response-section').classList.add('visible');
-  document.getElementById('response-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function addChatTurn(userMsg, data) {
+  const history = document.getElementById('chat-history');
+  const isWarm = currentMode === 'warm';
+  const turn = document.createElement('div');
+  turn.className = 'chat-turn';
+  turn.innerHTML =
+    '<div class="chat-user-msg">' + escapeHtml(userMsg) + '</div>' +
+    '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
+    '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(data.insight) + '</div></div>' +
+    '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(data.meditation) + '</div></div>' +
+    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.coaching) + '</div></div></div>' +
+    (turnCount === 1 ? feedbackHTML() : '');
+  history.appendChild(turn);
+  turn.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function hideResponse() { document.getElementById('response-section').classList.remove('visible'); }
+function feedbackHTML() {
+  return '<div class="feedback-section"><div class="star-section"><p class="feedback-label">오늘 마음방이 도움이 되었나요?</p><div class="stars"><span class="star" onclick="rateStar(1)">★</span><span class="star" onclick="rateStar(2)">★</span><span class="star" onclick="rateStar(3)">★</span><span class="star" onclick="rateStar(4)">★</span><span class="star" onclick="rateStar(5)">★</span></div><p class="star-msg" id="star-msg"></p></div><div class="share-section"><p class="feedback-label">이 공간을 나누고 싶다면</p><button class="share-btn kakao" onclick="shareKakao()"><span>💬</span> 카카오톡으로 공유</button><button class="share-btn link" onclick="copyLink()"><span>🔗</span> 링크 복사</button></div></div>';
+}
+
+function showContinueSection() {
+  const sec = document.getElementById('continue-section');
+  const remaining = MAX_TURNS - turnCount;
+  document.getElementById('continue-count').textContent = '대화 ' + turnCount + '/' + MAX_TURNS + ' · ' + remaining + '번 더 이어갈 수 있습니다';
+  sec.style.display = 'block';
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('continue-input').focus();
+}
+
+function showLimitBlock() {
+  document.getElementById('limit-block').style.display = 'block';
+  document.getElementById('limit-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 function showCrisis() {
   document.getElementById('crisis-block').classList.add('visible');
   document.getElementById('crisis-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setSubmitDisabled(false);
 }
 
 function hideCrisis() { document.getElementById('crisis-block').classList.remove('visible'); }
 function showLoading(show) { document.getElementById('loading').classList.toggle('visible', show); }
 function showError(msg) { document.getElementById('error-text').textContent = msg; document.getElementById('error-block').classList.add('visible'); }
 function hideError() { document.getElementById('error-block').classList.remove('visible'); }
-function setSubmitDisabled(disabled) { document.getElementById('submit-btn').disabled = disabled; }
+
+function rateStar(n) {
+  document.querySelectorAll('.star').forEach(function(s, i) { s.classList.toggle('active', i < n); });
+  var msgs = ['','마음에 담아두겠습니다.','조금 더 다듬겠습니다.','함께해 주셔서 감사합니다.','이 공간이 도움이 되어 기쁩니다.','깎아내면 남는 것이 진짜입니다. 고맙습니다.'];
+  var el = document.getElementById('star-msg');
+  if (el) el.textContent = msgs[n];
+}
+
+function shareKakao() {
+  var url = 'https://sontop-sangdam.vercel.app';
+  var text = '손톱서점 마음방 — 지금 이것\n철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간\n\n' + url;
+  if (navigator.share) { navigator.share({ title: '손톱서점 마음방', text: '철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간', url: url }); }
+  else { navigator.clipboard.writeText(text).then(function() { alert('링크가 복사됐습니다. 카카오톡에 붙여넣기 해주세요! 📋'); }); }
+}
+
+function copyLink() {
+  var url = 'https://sontop-sangdam.vercel.app';
+  navigator.clipboard.writeText(url).then(function() {
+    var btn = document.querySelector('.share-btn.link');
+    if (!btn) return;
+    var orig = btn.innerHTML;
+    btn.innerHTML = '✅ 복사됐습니다';
+    setTimeout(function() { btn.innerHTML = orig; }, 2000);
+  }).catch(function() { alert('주소: https://sontop-sangdam.vercel.app'); });
+}
 
 function resetForm() {
+  chatHistory = []; turnCount = 0; currentMode = null;
+  clearStorage();
+  document.getElementById('chat-history').innerHTML = '';
+  document.getElementById('input-section').style.display = 'block';
+  document.getElementById('continue-section').style.display = 'none';
+  document.getElementById('limit-block').style.display = 'none';
   document.getElementById('user-input').value = '';
-  hideResponse();
-  hideCrisis();
-  hideError();
-  setSubmitDisabled(true);
-  currentMode = null;
   document.getElementById('btn-warm').className = 'mode-btn';
   document.getElementById('btn-sharp').className = 'mode-btn';
   document.getElementById('submit-btn').className = 'submit-btn mode-warm';
+  document.getElementById('submit-btn').disabled = true;
+  hideCrisis(); hideError();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function toggleAbout() {
+  document.getElementById('about-content').classList.toggle('visible');
+  document.getElementById('about-arrow').classList.toggle('open');
+}
+
+var DAILY_WORDS = ["깎아내면 남는 것이 진짜입니다.","지금 이것. 이것으로 충분합니다.","나무는 서두르지 않아도 자랍니다.","붙잡고 있는 것이 나를 붙잡고 있습니다.","온전한 나는 멀리 있지 않습니다. 지금 여기입니다.","느리게 가는 것이 가장 빠른 길일 때가 있습니다.","목수는 더하지 않습니다. 없애서 본질을 드러냅니다.","방생은 포기가 아닙니다. 본래 자리로 돌려보내는 것입니다.","해는 애쓰지 않아도 뜹니다. 당신도 그렇습니다.","렌즈를 바꾸면 같은 풍경이 달라집니다.","된장은 서두르면 맛이 없습니다. 지금 익어가고 있습니다.","당기면 당길수록 더 멀리 갑니다. 지금 이 저항이 도약의 준비입니다.","80억 촛불이 하나의 바탕에서 빛납니다. 당신의 빛도 그 안에 있습니다.","단순하게. 덧붙이지 않는 것이 충만함입니다.","지금 멈춘 건가요, 쉬는 건가요?","껍데기를 깎아내면 본래의 나가 드러납니다.","자유는 얻는 것이 아니라 드러나는 것입니다.","그냥 알고, 그대로 받아들일 수 있습니다.","나무 안에 이미 새가 있었습니다.","놓아주면 무엇이 시작될까요?","지금 이 고요함 속에서 당신은 무엇을 듣고 있습니까?","작은 것이 세상을 바꿉니다.","멈추지 않으면 실개천도 바다입니다.","완성은 손에서 떠날 때입니다.","애쓰는 것과 존재하는 것은 다릅니다.","지금 당신의 마음은 흐르고 있습니까?","깎고, 쉬고, 웃고. 그것으로 충분합니다.","이미 그러합니다. 새로 얻을 필요가 없습니다.","지금 이 자리가 본래의 자리입니다.","손톱만 한 서점에서, 마음만 한 이야기를 나눕니다."];
+
+(function() {
+  var today = new Date();
+  var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  document.getElementById('daily-text').textContent = DAILY_WORDS[dayOfYear % DAILY_WORDS.length];
+})();
+
 document.getElementById('user-input').addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendMessage();
+});
+document.getElementById('continue-input').addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') continueChat();
 });
 </script>
 
