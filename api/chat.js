@@ -144,7 +144,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: '허용되지 않는 메서드입니다.' });
 
-  const { message, mode } = req.body;
+  const { message, mode, history, turnCount } = req.body;
 
   if (!message || typeof message !== 'string' || message.trim().length < 2) {
     return res.status(400).json({ error: '메시지를 입력해 주세요.' });
@@ -156,6 +156,20 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'API 키가 설정되지 않았습니다.' });
+
+  // 대화 히스토리 구성 (첫 질문 + 이어지는 대화)
+  const messages = [];
+
+  // 이전 대화가 있으면 포함 (마지막 사용자 메시지 제외하고)
+  if (history && history.length > 1) {
+    const prevHistory = history.slice(0, -1); // 마지막(현재 메시지) 제외
+    for (const h of prevHistory) {
+      messages.push({ role: h.role, content: h.content });
+    }
+  }
+
+  // 현재 메시지 추가
+  messages.push({ role: 'user', content: message.trim() });
 
   const systemPrompt = mode === 'sharp' ? SHARP_PROMPT : WARM_PROMPT;
 
@@ -171,7 +185,7 @@ export default async function handler(req, res) {
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 1500,
         system: systemPrompt,
-        messages: [{ role: 'user', content: message.trim() }]
+        messages: messages
       })
     });
 
