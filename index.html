@@ -657,6 +657,101 @@
 
   .about-link:hover { border-color: var(--wood-light); }
 
+  /* ── 카테고리 메뉴 ── */
+  .category-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .category-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .cat-btn {
+    padding: 0.7rem 0.5rem;
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    font-weight: 400;
+    border: 1px solid var(--paper-dark);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .cat-btn:hover { border-color: var(--wood-light); color: var(--ink); }
+  .cat-btn.active { background: var(--wood); border-color: var(--wood); color: white; }
+
+  .cat-btn .cat-icon { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
+  .cat-btn .cat-name { font-weight: 500; display: block; font-size: 0.8rem; }
+  .cat-btn .cat-desc { font-size: 0.68rem; opacity: 0.8; display: block; font-family: var(--sans); }
+
+  /* ── 처방 카드 ── */
+  .poem-card {
+    margin-top: 2rem;
+    padding: 2rem 2rem;
+    background: var(--ink);
+    border-radius: var(--radius);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .poem-card-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--wood-light);
+    margin-bottom: 1.25rem;
+    font-weight: 300;
+  }
+
+  .poem-card-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 2.2;
+    white-space: pre-wrap;
+  }
+
+  .poem-card-author {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--wood-light);
+    margin-top: 1.25rem;
+    letter-spacing: 0.15em;
+  }
+
+  .poem-share-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    color: var(--wood-light);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    border: 1px solid var(--wood);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .poem-share-btn:hover { background: var(--wood); color: white; }
+
   .disclaimer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--paper-dark); font-family: var(--sans); font-size: 0.72rem; color: var(--ink-ghost); line-height: 1.9; text-align: center; }
 
   footer { position: relative; text-align: center; padding: 2rem; border-top: 1px solid var(--paper-dark); background: var(--paper-warm); z-index: 1; }
@@ -670,6 +765,8 @@
     h1 { font-size: 1.6rem; }
     .mode-buttons { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .mode-btn { padding: 0.75rem 0.5rem; font-size: 0.82rem; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat-btn .cat-desc { display: none; }
   }
 </style>
 </head>
@@ -690,6 +787,48 @@
   <div class="daily-word" id="daily-word">
     <span class="daily-label">오늘의 한마디</span>
     <p class="daily-text" id="daily-text"></p>
+  </div>
+
+  <!-- 카테고리 선택 -->
+  <div class="category-section">
+    <label class="category-label">어떤 이야기를 나눌까요?</label>
+    <div class="category-grid">
+      <button class="cat-btn" id="cat-emotion" onclick="selectCategory('emotion')">
+        <span class="cat-icon">💧</span>
+        <span class="cat-name">감정</span>
+        <span class="cat-desc">요즘 감정이 힘들어요</span>
+      </button>
+      <button class="cat-btn" id="cat-direction" onclick="selectCategory('direction')">
+        <span class="cat-icon">🧭</span>
+        <span class="cat-name">방향</span>
+        <span class="cat-desc">어떻게 살아야 할지</span>
+      </button>
+      <button class="cat-btn" id="cat-relation" onclick="selectCategory('relation')">
+        <span class="cat-icon">🤝</span>
+        <span class="cat-name">관계</span>
+        <span class="cat-desc">사람 때문에 지쳐요</span>
+      </button>
+      <button class="cat-btn" id="cat-existence" onclick="selectCategory('existence')">
+        <span class="cat-icon">🔮</span>
+        <span class="cat-name">존재</span>
+        <span class="cat-desc">나는 누구인지 모르겠어요</span>
+      </button>
+      <button class="cat-btn" id="cat-spirit" onclick="selectCategory('spirit')">
+        <span class="cat-icon">🕯️</span>
+        <span class="cat-name">영성</span>
+        <span class="cat-desc">더 깊은 무언가가 궁금해요</span>
+      </button>
+      <button class="cat-btn" id="cat-inspire" onclick="selectCategory('inspire')">
+        <span class="cat-icon">💡</span>
+        <span class="cat-name">영감</span>
+        <span class="cat-desc">새로운 눈으로 보고 싶어요</span>
+      </button>
+      <button class="cat-btn" id="cat-daily" onclick="selectCategory('daily')">
+        <span class="cat-icon">🌱</span>
+        <span class="cat-name">일상</span>
+        <span class="cat-desc">단순하게 살고 싶어요</span>
+      </button>
+    </div>
   </div>
 
   <!-- 모드 선택 -->
@@ -879,15 +1018,40 @@
     <a href="https://pf.kakao.com/_xosonotopseojeon" target="_blank">카카오 채널: 손톱서점</a>
     &nbsp;·&nbsp;
     <a href="https://www.youtube.com/@CarvingStillness" target="_blank">유튜브: Carving Stillness</a><br>
-    <span style="font-size:0.65rem; letter-spacing:0.1em; opacity:0.6;">v1.2 · 2026.05.18</span>
+    <span style="font-size:0.65rem; letter-spacing:0.1em; opacity:0.6;">v1.3 · 2026.05.23</span>
   </p>
 </footer>
 
 <script>
 let currentMode = null;
+let currentCategory = null;
 let chatHistory = [];
 let turnCount = 0;
 const MAX_TURNS = 5;
+
+const CATEGORY_PLACEHOLDERS = {
+  emotion: "요즘 감정이 힘들어요. 어떤 마음인지 털어놓아 볼게요...",
+  direction: "어떻게 살아야 할지 모르겠어요...",
+  relation: "사람 때문에 지쳐요...",
+  existence: "나는 누구인지, 삶의 의미가 뭔지 모르겠어요...",
+  spirit: "더 깊은 무언가가 궁금해요...",
+  inspire: "새로운 눈으로 보고 싶어요...",
+  daily: "단순하게 살고 싶은데 잘 안 돼요..."
+};
+
+function selectCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-' + cat).classList.add('active');
+  const ph = CATEGORY_PLACEHOLDERS[cat] || "지금 마음에 있는 것을 털어놓으세요.";
+  document.getElementById('user-input').placeholder = ph;
+  checkSubmitReady();
+}
+
+function checkSubmitReady() {
+  const ready = currentMode && currentCategory;
+  document.getElementById('submit-btn').disabled = !ready;
+}
 const STORAGE_KEY = 'sontop_chat';
 const EXPIRE_MIN = 30;
 
@@ -985,7 +1149,7 @@ function selectMode(mode) {
     submitBtn.className = 'submit-btn mode-sharp';
     document.getElementById('loading-text').textContent = '죽비를 들어 핵심을 찾고 있습니다';
   }
-  submitBtn.disabled = false;
+  checkSubmitReady();
 }
 
 async function sendMessage() {
@@ -1016,7 +1180,7 @@ async function callAPI(userMessage) {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userMessage, mode: currentMode, history: chatHistory, turnCount: turnCount })
+      body: JSON.stringify({ message: userMessage, mode: currentMode, category: currentCategory, history: chatHistory, turnCount: turnCount })
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'HTTP_' + response.status);
@@ -1046,6 +1210,7 @@ function addChatTurn(userMsg, data) {
     '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(data.insight) + '</div></div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(data.meditation) + '</div></div>' +
     '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.coaching) + '</div></div></div>' +
+    (data.poem ? '<div class="poem-card"><div class="poem-card-label">오늘의 처방 시</div><div class="poem-card-text">' + escapeHtml(data.poem) + '</div><div class="poem-card-author">— 웃네</div><button class="poem-share-btn" onclick="sharePoem(this)">📋 카드 공유하기</button></div>' : '') +
     (turnCount === 1 ? feedbackHTML() : '');
   history.appendChild(turn);
   turn.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1108,18 +1273,34 @@ function copyLink() {
   }).catch(function() { alert('주소: https://sontop-sangdam.vercel.app'); });
 }
 
+function sharePoem(btn) {
+  var poemText = btn.parentElement.querySelector('.poem-card-text').textContent;
+  var shareText = poemText + '\n\n— 웃네\n\nhttps://sontop-sangdam.vercel.app';
+  if (navigator.share) {
+    navigator.share({ title: '웃네의 마음 문답 처방 시', text: shareText });
+  } else {
+    navigator.clipboard.writeText(shareText).then(function() {
+      var orig = btn.innerHTML;
+      btn.innerHTML = '✅ 복사됐습니다';
+      setTimeout(function() { btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+
 function resetForm() {
-  chatHistory = []; turnCount = 0; currentMode = null;
+  chatHistory = []; turnCount = 0; currentMode = null; currentCategory = null;
   clearStorage();
   document.getElementById('chat-history').innerHTML = '';
   document.getElementById('input-section').style.display = 'block';
   document.getElementById('continue-section').style.display = 'none';
   document.getElementById('limit-block').style.display = 'none';
   document.getElementById('user-input').value = '';
+  document.getElementById('user-input').placeholder = '요즘 어떤 마음이 당신을 붙잡고 있나요? 작은 것도 괜찮습니다. 그대로 적어주세요.';
   document.getElementById('btn-warm').className = 'mode-btn';
   document.getElementById('btn-sharp').className = 'mode-btn';
   document.getElementById('submit-btn').className = 'submit-btn mode-warm';
   document.getElementById('submit-btn').disabled = true;
+  document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
   hideCrisis(); hideError();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
