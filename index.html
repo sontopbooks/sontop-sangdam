@@ -1186,7 +1186,7 @@ async function callAPI(userMessage) {
     if (!response.ok) throw new Error(data.error || 'HTTP_' + response.status);
     showLoading(false);
     if (data.crisis) { showCrisis(); return; }
-    const aiContent = (data.insight || '') + '\n' + (data.meditation || '') + '\n' + (data.coaching || '');
+    const aiContent = (data.insight || '') + '\n' + (data.meditation || '') + '\n' + (data.question || '');
     chatHistory.push({ role: 'assistant', content: aiContent });
     turnCount++;
     saveToStorage();
@@ -1209,7 +1209,7 @@ function addChatTurn(userMsg, data) {
     '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(data.insight) + '</div></div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(data.meditation) + '</div></div>' +
-    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.coaching) + '</div></div></div>' +
+    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.question) + '</div></div></div>' +
     (data.poem ? '<div class="poem-card"><div class="poem-card-label">오늘의 처방 시</div><div class="poem-card-text">' + escapeHtml(data.poem) + '</div><div class="poem-card-author">— 웃네</div><button class="poem-share-btn" onclick="sharePoem(this)">📋 카드 공유하기</button></div>' : '') +
     (turnCount === 1 ? feedbackHTML() : '');
   history.appendChild(turn);
