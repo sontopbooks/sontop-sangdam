@@ -35,10 +35,9 @@ async function upsertBatch(records) {
     headers: {
       'Content-Type': 'application/json',
       'Api-Key': PINECONE_API_KEY,
-      'X-Pinecone-API-Version': '2025-04'
+      'X-Pinecone-API-Version': '2025-01'
     },
     body: JSON.stringify({
-      namespace: '__default__',
       records: records.map(r => ({
         _id: r.id,
         text: r.text,
