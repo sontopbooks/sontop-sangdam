@@ -61,7 +61,7 @@ async function startUpload() {
     } catch(e) {
       log(`❌ 네트워크 오류: ${e.message}`, 'err');
     }
-    await new Promise(r => setTimeout(r, 800));
+    await new Promise(r => setTimeout(r, 3000));
   }
 
   log('🎉 전체 업로드 완료!', 'ok');
