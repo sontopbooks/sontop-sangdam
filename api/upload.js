@@ -1,23 +1,24 @@
-// /api/upload.js
+// /api/upload.js — Pinecone ndjson 방식 (공식 문서 기준)
 
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
 const PINECONE_HOST = "https://sontop-data-dj6kb5u.svc.aped-4627-b74a.pinecone.io";
 
 async function upsertBatch(records) {
+  // ndjson 형식으로 변환 (줄바꿈으로 구분)
+  const ndjson = records.map(r => JSON.stringify({
+    _id: r.id,
+    chunk_text: r.text,
+    source: r.source
+  })).join('\n');
+
   const response = await fetch(`${PINECONE_HOST}/records/namespaces/default/upsert`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-ndjson',
       'Api-Key': PINECONE_API_KEY,
-      'X-Pinecone-API-Version': '2025-01'
+      'X-Pinecone-Api-Version': '2025-01'
     },
-    body: JSON.stringify({
-      records: records.map(r => ({
-        id: r.id,
-        text: r.text,
-        source: r.source
-      }))
-    })
+    body: ndjson
   });
 
   if (!response.ok) {
