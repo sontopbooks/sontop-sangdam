@@ -1,30 +1,30 @@
-// /api/upload.js — Pinecone integrated embedding 방식
+// /api/upload.js — Pinecone integrated embedding 방식 (수정)
 
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
-const PINECONE_INDEX_NAME = "sontop-data";
+const PINECONE_HOST = "https://sontop-data-dj6kb5u.svc.aped-4627-b74a.pinecone.io";
 
 async function upsertBatch(records) {
-  // Pinecone inference API로 임베딩 + upsert 한번에
-  const response = await fetch(`https://api.pinecone.io/records/namespaces/default/upsert`, {
+  const url = `${PINECONE_HOST}/records/namespaces/default/upsert`;
+  
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Api-Key': PINECONE_API_KEY,
-      'X-Pinecone-API-Version': '2025-04'
+      'X-Pinecone-API-Version': '2025-01'
     },
     body: JSON.stringify({
       records: records.map(r => ({
         _id: r.id,
         text: r.text,
         source: r.source
-      })),
-      indexName: PINECONE_INDEX_NAME
+      }))
     })
   });
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`Pinecone 오류 ${response.status}: ${err}`);
+    throw new Error(`Pinecone 오류 ${response.status}: ${err.slice(0, 200)}`);
   }
   return response.status;
 }
