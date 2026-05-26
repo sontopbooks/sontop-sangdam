@@ -45,7 +45,9 @@
 
   .daily-word { text-align: center; margin-bottom: 2.5rem; padding: 1.75rem 2rem; background: var(--paper-warm); border-left: 2px solid var(--wood-light); border-right: 2px solid var(--wood-light); }
   .daily-label { display: block; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--wood); margin-bottom: 0.75rem; font-weight: 400; }
-  .daily-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); line-height: 2; word-break: keep-all; }
+  .daily-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); line-height: 2.2; word-break: keep-all; white-space: pre-line; }
+  .daily-poem-title { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--wood); margin-bottom: 0.75rem; font-weight: 400; }
+  .daily-poem-author { font-family: var(--serif); font-size: 0.8rem; color: var(--wood-light); margin-top: 0.75rem; font-weight: 300; }
 
   .mode-section { margin-bottom: 1.5rem; }
   .mode-label { display: block; font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 0.75rem; font-weight: 400; }
@@ -223,8 +225,10 @@
   </div>
 
   <div class="daily-word" id="daily-word">
-    <span class="daily-label">오늘의 한마디</span>
+    <span class="daily-label">오늘의 손톱시</span>
+    <p class="daily-poem-title" id="daily-poem-title"></p>
     <p class="daily-text" id="daily-text"></p>
+    <p class="daily-poem-author">— 웃네</p>
   </div>
 
   <div class="category-section">
@@ -585,12 +589,40 @@ function toggleAbout() {
   document.getElementById('about-arrow').classList.toggle('open');
 }
 
-var DAILY_WORDS = ["깎아내면 남는 것이 진짜입니다.","지금 이것. 이것으로 충분합니다.","나무는 서두르지 않아도 자랍니다.","붙잡고 있는 것이 나를 붙잡고 있습니다.","온전한 나는 멀리 있지 않습니다. 지금 여기입니다.","느리게 가는 것이 가장 빠른 길일 때가 있습니다.","목수는 더하지 않습니다. 없애서 본질을 드러냅니다.","방생은 포기가 아닙니다. 본래 자리로 돌려보내는 것입니다.","해는 애쓰지 않아도 뜹니다. 당신도 그렇습니다.","렌즈를 바꾸면 같은 풍경이 달라집니다.","된장은 서두르면 맛이 없습니다. 지금 익어가고 있습니다.","당기면 당길수록 더 멀리 갑니다. 지금 이 저항이 도약의 준비입니다.","80억 촛불이 하나의 바탕에서 빛납니다. 당신의 빛도 그 안에 있습니다.","단순하게. 덧붙이지 않는 것이 충만함입니다.","지금 멈춘 건가요, 쉬는 건가요?","껍데기를 깎아내면 본래의 나가 드러납니다.","자유는 얻는 것이 아니라 드러나는 것입니다.","그냥 알고, 그대로 받아들일 수 있습니다.","나무 안에 이미 새가 있었습니다.","놓아주면 무엇이 시작될까요?","지금 이 고요함 속에서 당신은 무엇을 듣고 있습니까?","작은 것이 세상을 바꿉니다.","멈추지 않으면 실개천도 바다입니다.","완성은 손에서 떠날 때입니다.","애쓰는 것과 존재하는 것은 다릅니다.","지금 당신의 마음은 흐르고 있습니까?","깎고, 쉬고, 웃고. 그것으로 충분합니다.","이미 그러합니다. 새로 얻을 필요가 없습니다.","지금 이 자리가 본래의 자리입니다.","손톱만 한 서점에서, 마음만 한 이야기를 나눕니다."];
+var DAILY_POEMS = [
+  { title: "#손톱", text: "자라도\n\n잘라내도" },
+  { title: "#품", text: "날아든 참새\n놀란\n솔잎 향\n품을 내어주는" },
+  { title: "#아내와 파", text: "한겨울\n파 뿌리 쑥쑥 큰다\n버려질\n페트병" },
+  { title: "#마디", text: "멈추었던\n마디에서\n움이 트고\n시가 나와" },
+  { title: "#벚나무 길에서", text: "봄 오면\n꽃망울 터지겠지\n까치발\n차인 가지" },
+  { title: "#봄머리", text: "봄머리 들면\n강물 딛는 윤슬도\n꽃으로 보네" },
+  { title: "#온종일 비", text: "아무것도\n한 게 없네\n아무 일\n없네" },
+  { title: "#눈 내리는 밤", text: "까무룩\n꿈을 꾸네\n눈 내리는\n밤" },
+  { title: "#찻물 내린 밤", text: "눈 쌓인 솔가지\n찻잔\n하나" },
+  { title: "#가을밤을 거닐다", text: "꽃 한 송이 꺾으려고\n손을 뻗는데\n살포시\n손목을 잡는\n달빛" },
+  { title: "#채송화", text: "웃고 또 웃었다\n네가 볼 때까지\n너를 보고 좋아서\n해가 질 때까지 웃었다" },
+  { title: "#마음", text: "길 가다\n마음 하나 주웠다\n누구냐?\n함부로 버린 이" },
+  { title: "#망울", text: "그리고 그리다\n쌓이고 또 쌓였지\n툭 터져 버릴" },
+  { title: "#일 년", text: "꽃 피고 꽃 지는 사이\n꽃 지고 또 피는 사이" },
+  { title: "#실개천", text: "흐름을\n멈추지 않으면\n실개천도 바다지" },
+  { title: "#제비꽃", text: "내 가슴\n작고 여려도\n봄을 품을 정도는 되지" },
+  { title: "#봄바람", text: "한겨울\n잘 견뎌냈다고\n호 불어주는\n아 엄마" },
+  { title: "#사랑을", text: "하려면\n되어야지\n아닌데\n어찌하나\n꽃 피지 않으면\n향기 또한 없어\n꽃 그냥 꽃" },
+  { title: "#단풍의 사랑", text: "떨어질 줄 알면서도\n붉어지고\n또 붉어지고\n붉어지기 위해\n떨어지고" },
+  { title: "#산다는 것", text: "물 위에\n생각을 쓴다\n물 위에\n인생을 쓴다\n흐르는 물 위에\n삶을\n쓰다" },
+  { title: "#웃네", text: "꽃 보고 웃네\n꽃 웃네\n웃네" },
+  { title: "#움", text: "서두르지 않고\n애쓰지 않고" },
+  { title: "#아무도 읽지 않을", text: "가슴에\n소설 한 편\n막걸릿잔에\n시 한 수" },
+  { title: "#벚꽃 잎", text: "작년에도\n올해도 떨어지네\n그 자리" },
+];
+
 
 (function() {
   var today = new Date();
   var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-  document.getElementById('daily-text').textContent = DAILY_WORDS[dayOfYear % DAILY_WORDS.length];
+  var poem = DAILY_POEMS[dayOfYear % DAILY_POEMS.length];
+  document.getElementById('daily-poem-title').textContent = poem.title;
+  document.getElementById('daily-text').textContent = poem.text;
 })();
 
 document.getElementById('user-input').addEventListener('keydown', function(e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendMessage(); });
