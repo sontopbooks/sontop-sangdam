@@ -1213,7 +1213,8 @@ function addChatTurn(userMsg, data) {
     (data.poem ? '<div class="poem-card"><div class="poem-card-label">오늘의 처방 시</div><div class="poem-card-text">' + escapeHtml(data.poem) + '</div><div class="poem-card-author">— 웃네</div><button class="poem-share-btn" onclick="sharePoem(this)">📋 카드 공유하기</button></div>' : '') +
     (turnCount === 1 ? feedbackHTML() : '');
   history.appendChild(turn);
-  turn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+ turn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+setTimeout(function() { turn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 }
 
 function feedbackHTML() {
