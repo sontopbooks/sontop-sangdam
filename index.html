@@ -28,242 +28,51 @@
     --radius: 2px;
   }
 
-  body {
-    font-family: var(--serif);
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    line-height: 1.8;
-  }
+  body { font-family: var(--serif); background: var(--paper); color: var(--ink); min-height: 100vh; line-height: 1.8; }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: repeating-linear-gradient(175deg, transparent 0px, transparent 48px, rgba(139,111,78,0.015) 49px, rgba(139,111,78,0.015) 50px);
-    pointer-events: none;
-    z-index: 0;
-  }
+  body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(175deg, transparent 0px, transparent 48px, rgba(139,111,78,0.015) 49px, rgba(139,111,78,0.015) 50px); pointer-events: none; z-index: 0; }
 
-  header {
-    position: relative;
-    text-align: center;
-    padding: 5rem 2rem 3rem;
-    border-bottom: 1px solid var(--paper-dark);
-    background: var(--paper-warm);
-    z-index: 1;
-  }
+  header { position: relative; text-align: center; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--paper-dark); background: var(--paper-warm); z-index: 1; }
 
-  .brand-mark {
-    display: inline-block;
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    letter-spacing: 0.4em;
-    color: var(--wood);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    font-weight: 400;
-  }
+  .brand-mark { display: inline-block; font-family: var(--serif); font-size: 0.9rem; letter-spacing: 0.4em; color: var(--wood); text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 400; }
+  .brand-mark::before, .brand-mark::after { content: '—'; margin: 0 0.5rem; opacity: 0.5; }
 
-  .brand-mark::before, .brand-mark::after {
-    content: '—';
-    margin: 0 0.5rem;
-    opacity: 0.5;
-  }
+  h1 { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 300; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.3; }
+  .subtitle { font-family: var(--sans); font-size: 1rem; color: var(--ink-ghost); letter-spacing: 0.05em; line-height: 2; font-weight: 300; word-break: keep-all; }
+  .header-divider { width: 40px; height: 1px; background: var(--wood-light); margin: 1.5rem auto; }
 
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
-  }
+  main { position: relative; max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; z-index: 1; }
 
-  .subtitle {
-    font-family: var(--sans);
-    font-size: 1rem;
-    color: var(--ink-ghost);
-    letter-spacing: 0.05em;
-    line-height: 2;
-    font-weight: 300;
-    word-break: keep-all;
-  }
+  .daily-word { text-align: center; margin-bottom: 2.5rem; padding: 1.75rem 2rem; background: var(--paper-warm); border-left: 2px solid var(--wood-light); border-right: 2px solid var(--wood-light); }
+  .daily-label { display: block; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--wood); margin-bottom: 0.75rem; font-weight: 400; }
+  .daily-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); line-height: 2; word-break: keep-all; }
 
-  .header-divider {
-    width: 40px;
-    height: 1px;
-    background: var(--wood-light);
-    margin: 1.5rem auto;
-  }
-
-  main {
-    position: relative;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 3rem 2rem 6rem;
-    z-index: 1;
-  }
-
-  .intro-quote {
-    text-align: center;
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--ink-soft);
-    font-weight: 300;
-    line-height: 2.2;
-    margin-bottom: 3rem;
-    padding: 2rem;
-    border-left: 2px solid var(--wood-light);
-    border-right: 2px solid var(--wood-light);
-    background: var(--paper-warm);
-  }
-
-  .daily-word {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding: 1.75rem 2rem;
-    background: var(--paper-warm);
-    border-left: 2px solid var(--wood-light);
-    border-right: 2px solid var(--wood-light);
-  }
-
-  .daily-label {
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    color: var(--wood);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
-
-  .daily-text {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2;
-    word-break: keep-all;
-  }
-
-  /* ── 모드 선택 버튼 ── */
-  .mode-section {
-    margin-bottom: 1.5rem;
-  }
-
-  .mode-label {
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
-
-  .mode-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  .mode-btn {
-    padding: 1rem 1.25rem;
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    font-weight: 400;
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--paper-warm);
-    color: var(--ink-soft);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .mode-btn:hover {
-    border-color: var(--wood-light);
-    color: var(--ink);
-  }
-
-  .mode-btn.active-warm {
-    background: var(--sage);
-    border-color: var(--sage);
-    color: white;
-  }
-
-  .mode-btn.active-sharp {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-
+  .mode-section { margin-bottom: 1.5rem; }
+  .mode-label { display: block; font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 0.75rem; font-weight: 400; }
+  .mode-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .mode-btn { padding: 1rem 1.25rem; font-family: var(--serif); font-size: 0.9rem; font-weight: 400; border: 1px solid var(--paper-dark); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; background: var(--paper-warm); color: var(--ink-soft); text-align: center; line-height: 1.6; }
+  .mode-btn:hover { border-color: var(--wood-light); color: var(--ink); }
+  .mode-btn.active-warm { background: var(--sage); border-color: var(--sage); color: white; }
+  .mode-btn.active-sharp { background: var(--accent); border-color: var(--accent); color: white; }
   .mode-btn .mode-icon { font-size: 1.2rem; display: block; margin-bottom: 0.25rem; }
   .mode-btn .mode-name { font-weight: 500; display: block; }
   .mode-btn .mode-desc { font-size: 0.75rem; opacity: 0.8; display: block; font-family: var(--sans); }
 
-  /* ── 입력 영역 ── */
   .input-section { margin-bottom: 1rem; }
-
-  .input-label {
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
-
-  textarea {
-    width: 100%;
-    min-height: 140px;
-    padding: 1.25rem 1.5rem;
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--ink);
-    background: var(--paper-warm);
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.3s;
-    line-height: 1.9;
-  }
-
+  .input-label { display: block; font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 0.75rem; font-weight: 400; }
+  textarea { width: 100%; min-height: 140px; padding: 1.25rem 1.5rem; font-family: var(--serif); font-size: 0.95rem; font-weight: 300; color: var(--ink); background: var(--paper-warm); border: 1px solid var(--paper-dark); border-radius: var(--radius); resize: vertical; outline: none; transition: border-color 0.3s; line-height: 1.9; }
   textarea:focus { border-color: var(--wood-light); }
   textarea::placeholder { color: var(--ink-ghost); font-style: italic; font-weight: 300; }
 
-  .submit-btn {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-    padding: 1rem 2rem;
-    background: var(--accent);
-    color: var(--paper);
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background 0.25s, transform 0.1s;
-  }
-
+  .submit-btn { display: block; width: 100%; margin-top: 1rem; padding: 1rem 2rem; background: var(--accent); color: var(--paper); font-family: var(--serif); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.12em; border: none; border-radius: var(--radius); cursor: pointer; transition: background 0.25s, transform 0.1s; }
   .submit-btn:hover { background: var(--wood); }
   .submit-btn:active { transform: scale(0.995); }
   .submit-btn:disabled { background: var(--paper-dark); color: var(--ink-ghost); cursor: not-allowed; }
-
   .submit-btn.mode-warm { background: var(--sage); }
   .submit-btn.mode-warm:hover { background: #556655; }
   .submit-btn.mode-sharp { background: var(--accent); }
   .submit-btn.mode-sharp:hover { background: var(--wood); }
 
-  /* ── 로딩 ── */
   .loading { display: none; text-align: center; padding: 3rem 0; color: var(--ink-ghost); }
   .loading.visible { display: block; }
   .loading-dots { display: inline-flex; gap: 6px; margin-bottom: 1rem; }
@@ -273,487 +82,112 @@
   @keyframes breathe { 0%, 100% { opacity: 0.2; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1); } }
   .loading-text { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 300; }
 
-  /* ── 답변 영역 ── */
-  .response-section { display: none; margin-top: 3rem; border-top: 1px solid var(--paper-dark); padding-top: 3rem; animation: fadeIn 0.8s ease; }
-  .response-section.visible { display: block; }
+  .chat-history { margin-top: 2rem; display: flex; flex-direction: column; gap: 2.5rem; }
+  .chat-turn { border-top: 1px solid var(--paper-dark); padding-top: 2rem; animation: fadeIn 0.6s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-  .mode-badge {
-    display: inline-block;
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    font-weight: 400;
-  }
+  .chat-user-msg { font-family: var(--serif); font-size: 0.9rem; font-weight: 400; color: var(--ink-ghost); font-style: italic; margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: var(--paper-warm); border-radius: var(--radius); word-break: keep-all; }
+  .chat-user-msg::before { content: '"'; color: var(--wood-light); font-size: 1.2rem; margin-right: 0.2rem; }
+  .chat-user-msg::after { content: '"'; color: var(--wood-light); font-size: 1.2rem; margin-left: 0.2rem; }
 
+  .mode-badge { display: inline-block; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 2rem; font-weight: 400; }
   .mode-badge.warm { background: var(--sage); color: white; }
   .mode-badge.sharp { background: var(--accent); color: white; }
 
-  .step-label {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    color: var(--wood);
-    font-weight: 400;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
+  .step-label { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.25em; color: var(--wood); font-weight: 400; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
   .step-label::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
 
   .response-block { margin-bottom: 3rem; }
+  .response-text { font-family: var(--serif); font-size: 1rem; font-weight: 300; color: var(--ink-soft); line-height: 2.1; white-space: pre-wrap; }
 
-  .response-text {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2.1;
-    white-space: pre-wrap;
-  }
-
-  .coaching-block {
-    background: var(--paper-warm);
-    border-left: 3px solid var(--wood);
-    padding: 1.5rem 1.75rem;
-    border-radius: 0 var(--radius) var(--radius) 0;
-  }
-
+  .coaching-block { background: var(--paper-warm); border-left: 3px solid var(--wood); padding: 1.5rem 1.75rem; border-radius: 0 var(--radius) var(--radius) 0; }
   .coaching-block .response-text { color: var(--ink); font-size: 1.05rem; font-weight: 400; font-style: italic; }
 
-  /* ── 별점 + 공유 ── */
-  .feedback-section {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--paper-dark);
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-  }
+  .continue-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--paper-dark); }
+  .continue-count { font-family: var(--sans); font-size: 0.72rem; color: var(--wood-light); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .continue-textarea { width: 100%; min-height: 100px; padding: 1rem 1.25rem; font-family: var(--serif); font-size: 0.92rem; font-weight: 300; color: var(--ink); background: var(--paper-warm); border: 1px solid var(--paper-dark); border-radius: var(--radius); resize: vertical; outline: none; transition: border-color 0.3s; line-height: 1.9; }
+  .continue-textarea:focus { border-color: var(--wood-light); }
+  .continue-buttons { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
 
-  .feedback-label {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    color: var(--ink-ghost);
-    letter-spacing: 0.08em;
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
+  /* ── 5회 끝날 때 피드백 + 프린트 ── */
+  .limit-block { margin-top: 2rem; padding: 1.75rem; background: var(--paper-warm); border-left: 3px solid var(--wood-light); border-radius: 0 var(--radius) var(--radius) 0; animation: fadeIn 0.6s ease; }
+  .limit-text { font-family: var(--serif); font-size: 1rem; font-weight: 300; color: var(--ink-soft); line-height: 2; margin-bottom: 1.25rem; }
 
-  .stars {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .star {
-    font-size: 2rem;
-    color: var(--paper-dark);
-    cursor: pointer;
-    transition: color 0.15s, transform 0.1s;
-    user-select: none;
-  }
-
+  .feedback-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--paper-dark); display: flex; flex-direction: column; gap: 1.75rem; }
+  .feedback-label { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-ghost); letter-spacing: 0.08em; margin-bottom: 0.75rem; font-weight: 400; }
+  .stars { display: flex; gap: 0.5rem; }
+  .star { font-size: 2rem; color: var(--paper-dark); cursor: pointer; transition: color 0.15s, transform 0.1s; user-select: none; }
   .star:hover, .star.active { color: #c4a130; }
   .star:active { transform: scale(1.2); }
-
-  .star-msg {
-    font-family: var(--serif);
-    font-size: 0.88rem;
-    color: var(--wood);
-    margin-top: 0.6rem;
-    font-weight: 300;
-    min-height: 1.4rem;
-  }
+  .star-msg { font-family: var(--serif); font-size: 0.88rem; color: var(--wood); margin-top: 0.6rem; font-weight: 300; min-height: 1.4rem; }
 
   .share-section { display: flex; flex-direction: column; gap: 0.6rem; }
-
-  .share-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.8rem 1.25rem;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    font-weight: 400;
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: opacity 0.2s;
-    width: 100%;
-    justify-content: center;
-  }
-
+  .share-btn { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.25rem; font-family: var(--sans); font-size: 0.85rem; font-weight: 400; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity 0.2s; width: 100%; justify-content: center; }
   .share-btn:hover { opacity: 0.85; }
   .share-btn.kakao { background: #FEE500; color: #3A1D1D; }
   .share-btn.link { background: var(--paper-warm); color: var(--ink-soft); border: 1px solid var(--paper-dark); }
+  .share-btn.print { background: var(--ink); color: var(--paper); }
 
-  /* ── 대화 히스토리 ── */
-  .chat-history {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  .chat-turn {
-    border-top: 1px solid var(--paper-dark);
-    padding-top: 2rem;
-    animation: fadeIn 0.6s ease;
-  }
-
-  .chat-user-msg {
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--ink-ghost);
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    padding: 0.75rem 1rem;
-    background: var(--paper-warm);
-    border-radius: var(--radius);
-    word-break: keep-all;
-  }
-
-  .chat-user-msg::before {
-    content: '"';
-    color: var(--wood-light);
-    font-size: 1.2rem;
-    margin-right: 0.2rem;
-  }
-
-  .chat-user-msg::after {
-    content: '"';
-    color: var(--wood-light);
-    font-size: 1.2rem;
-    margin-left: 0.2rem;
-  }
-
-  /* ── 대화 이어가기 ── */
-  .continue-section {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--paper-dark);
-  }
-
-  .continue-count {
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--wood-light);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
-  }
-
-  .continue-textarea {
-    width: 100%;
-    min-height: 100px;
-    padding: 1rem 1.25rem;
-    font-family: var(--serif);
-    font-size: 0.92rem;
-    font-weight: 300;
-    color: var(--ink);
-    background: var(--paper-warm);
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.3s;
-    line-height: 1.9;
-  }
-
-  .continue-textarea:focus { border-color: var(--wood-light); }
-
-  .continue-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 0.75rem;
-  }
-
-  /* ── 3회 제한 ── */
-  .limit-block {
-    margin-top: 2rem;
-    padding: 1.75rem;
-    background: var(--paper-warm);
-    border-left: 3px solid var(--wood-light);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    animation: fadeIn 0.6s ease;
-  }
-
-  .limit-text {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2;
-    margin-bottom: 0.5rem;
-  }
-
-  /* ── 위기 안내 ── */
-  .crisis-block {
-    display: none;
-    background: #fdf5f0;
-    border: 1px solid #e8c8b8;
-    border-radius: var(--radius);
-    padding: 2rem 2rem;
-    margin-top: 2rem;
-    animation: fadeIn 0.8s ease;
-  }
-
+  .crisis-block { display: none; background: #fdf5f0; border: 1px solid #e8c8b8; border-radius: var(--radius); padding: 2rem; margin-top: 2rem; animation: fadeIn 0.8s ease; }
   .crisis-block.visible { display: block; }
-
-  .crisis-message {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .crisis-numbers {
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--ink-soft);
-    line-height: 2.2;
-    padding: 1rem 1.25rem;
-    background: white;
-    border-radius: var(--radius);
-    border: 1px solid var(--paper-dark);
-  }
-
+  .crisis-message { font-family: var(--serif); font-size: 1rem; font-weight: 300; color: var(--ink-soft); line-height: 2.1; margin-bottom: 1.5rem; }
+  .crisis-numbers { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; color: var(--ink-soft); line-height: 2.2; padding: 1rem 1.25rem; background: white; border-radius: var(--radius); border: 1px solid var(--paper-dark); }
   .crisis-numbers strong { color: var(--accent); font-size: 1rem; }
 
-  .reset-btn {
-    display: inline-block;
-    margin-top: 2.5rem;
-    padding: 0.65rem 1.5rem;
-    background: transparent;
-    color: var(--ink-ghost);
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
+  .reset-btn { display: inline-block; margin-top: 1rem; padding: 0.65rem 1.5rem; background: transparent; color: var(--ink-ghost); font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.12em; border: 1px solid var(--paper-dark); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
   .reset-btn:hover { border-color: var(--wood-light); color: var(--ink-soft); }
 
   .error-block { display: none; background: #fdf5f0; border: 1px solid #e8c8b8; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
   .error-block.visible { display: block; }
   .error-block p { font-family: var(--sans); font-size: 0.82rem; color: #8b4a2e; line-height: 1.8; }
 
-  /* ── 만든 사람 소개 ── */
-  .about-section {
-    margin-top: 4rem;
-    border-top: 1px solid var(--paper-dark);
-    border-bottom: 1px solid var(--paper-dark);
-  }
-
-  .about-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 0;
-    cursor: pointer;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    color: var(--ink-soft);
-    font-weight: 400;
-    user-select: none;
-  }
-
-  .about-toggle:hover { color: var(--wood); }
-
-  .about-arrow {
-    font-size: 1rem;
-    color: var(--wood-light);
-    transition: transform 0.3s;
-  }
-
-  .about-arrow.open { transform: rotate(180deg); }
-
-  .about-content {
-    display: none;
-    padding: 0 0 2rem;
-    animation: fadeIn 0.4s ease;
-  }
-
-  .about-content.visible { display: block; }
-
-  .about-name {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
-  }
-
-  .about-roles {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    color: var(--wood);
-    letter-spacing: 0.15em;
-    font-weight: 300;
-    margin-bottom: 1.25rem;
-  }
-
-  .about-divider {
-    width: 30px;
-    height: 1px;
-    background: var(--wood-light);
-    margin: 1.25rem 0;
-  }
-
-  .about-text {
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2.1;
-    word-break: keep-all;
-  }
-
-  .about-book { padding: 1rem 1.25rem; background: var(--paper-warm); border-radius: var(--radius); }
-  .about-book-label { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--wood); display: block; margin-bottom: 0.3rem; }
-  .about-book-title { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 0.4rem; }
-  .about-book-desc { font-family: var(--serif); font-size: 0.85rem; font-weight: 300; color: var(--ink-soft); margin: 0; }
-
-  .about-brand-text {
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 2;
-    word-break: keep-all;
-  }
-
-  .about-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1.25rem;
-  }
-
-  .about-link {
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    color: var(--wood);
-    text-decoration: none;
-    padding: 0.6rem 1rem;
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    background: var(--paper-warm);
-    transition: border-color 0.2s;
-  }
-
-  .about-link:hover { border-color: var(--wood-light); }
-
-  /* ── 카테고리 메뉴 ── */
-  .category-section {
-    margin-bottom: 1.5rem;
-  }
-
-  .category-label {
-    display: block;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
-
-  .category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-  }
-
-  .cat-btn {
-    padding: 0.7rem 0.5rem;
-    font-family: var(--serif);
-    font-size: 0.82rem;
-    font-weight: 400;
-    border: 1px solid var(--paper-dark);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--paper-warm);
-    color: var(--ink-soft);
-    text-align: center;
-    line-height: 1.5;
-  }
-
+  .category-section { margin-bottom: 1.5rem; }
+  .category-label { display: block; font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 0.75rem; font-weight: 400; }
+  .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  .cat-btn { padding: 0.7rem 0.5rem; font-family: var(--serif); font-size: 0.82rem; font-weight: 400; border: 1px solid var(--paper-dark); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; background: var(--paper-warm); color: var(--ink-soft); text-align: center; line-height: 1.5; }
   .cat-btn:hover { border-color: var(--wood-light); color: var(--ink); }
   .cat-btn.active { background: var(--wood); border-color: var(--wood); color: white; }
-
   .cat-btn .cat-icon { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
   .cat-btn .cat-name { font-weight: 500; display: block; font-size: 0.8rem; }
   .cat-btn .cat-desc { font-size: 0.68rem; opacity: 0.8; display: block; font-family: var(--sans); }
 
-  /* ── 처방 카드 ── */
-  .poem-card {
-    margin-top: 2rem;
-    padding: 2rem 2rem;
-    background: var(--ink);
-    border-radius: var(--radius);
-    text-align: center;
-    animation: fadeIn 0.8s ease;
+  /* ── 프린트 스타일 ── */
+  @media print {
+    header, .category-section, .mode-section, .input-section,
+    .continue-section, .limit-block, .about-section, footer,
+    .disclaimer, .loading, .error-block, .crisis-block,
+    .reset-btn, .share-section, .feedback-section { display: none !important; }
+    body { background: white; }
+    main { padding: 1rem; max-width: 100%; }
+    .chat-turn { border-top: 1px solid #ccc; page-break-inside: avoid; }
+    .response-text { color: #333; }
+    .coaching-block { border-left: 2px solid #8b6f4e; }
+    .print-header { display: block !important; text-align: center; margin-bottom: 2rem; font-family: serif; }
   }
 
-  .poem-card-label {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    color: var(--wood-light);
-    margin-bottom: 1.25rem;
-    font-weight: 300;
-  }
+  .print-header { display: none; }
 
-  .poem-card-text {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--paper);
-    line-height: 2.2;
-    white-space: pre-wrap;
-  }
-
-  .poem-card-author {
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    color: var(--wood-light);
-    margin-top: 1.25rem;
-    letter-spacing: 0.15em;
-  }
-
-  .poem-share-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1.25rem;
-    background: transparent;
-    color: var(--wood-light);
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    border: 1px solid var(--wood);
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .poem-share-btn:hover { background: var(--wood); color: white; }
+  .about-section { margin-top: 4rem; border-top: 1px solid var(--paper-dark); border-bottom: 1px solid var(--paper-dark); }
+  .about-toggle { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; cursor: pointer; font-family: var(--sans); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--ink-soft); font-weight: 400; user-select: none; }
+  .about-toggle:hover { color: var(--wood); }
+  .about-arrow { font-size: 1rem; color: var(--wood-light); transition: transform 0.3s; }
+  .about-arrow.open { transform: rotate(180deg); }
+  .about-content { display: none; padding: 0 0 2rem; animation: fadeIn 0.4s ease; }
+  .about-content.visible { display: block; }
+  .about-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem; }
+  .about-roles { font-family: var(--sans); font-size: 0.8rem; color: var(--wood); letter-spacing: 0.15em; font-weight: 300; margin-bottom: 1.25rem; }
+  .about-divider { width: 30px; height: 1px; background: var(--wood-light); margin: 1.25rem 0; }
+  .about-text { font-family: var(--serif); font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); line-height: 2.1; word-break: keep-all; }
+  .about-book { padding: 1rem 1.25rem; background: var(--paper-warm); border-radius: var(--radius); }
+  .about-book-label { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--wood); display: block; margin-bottom: 0.3rem; }
+  .about-book-title { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 0.4rem; }
+  .about-book-desc { font-family: var(--serif); font-size: 0.85rem; font-weight: 300; color: var(--ink-soft); margin: 0; }
+  .about-brand-text { font-family: var(--serif); font-size: 0.9rem; font-weight: 300; color: var(--ink-soft); line-height: 2; word-break: keep-all; }
+  .about-links { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.25rem; }
+  .about-link { font-family: var(--sans); font-size: 0.82rem; color: var(--wood); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--paper-dark); border-radius: var(--radius); background: var(--paper-warm); transition: border-color 0.2s; }
+  .about-link:hover { border-color: var(--wood-light); }
 
   .disclaimer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--paper-dark); font-family: var(--sans); font-size: 0.72rem; color: var(--ink-ghost); line-height: 1.9; text-align: center; }
-
   footer { position: relative; text-align: center; padding: 2rem; border-top: 1px solid var(--paper-dark); background: var(--paper-warm); z-index: 1; }
   footer p { font-family: var(--sans); font-size: 0.7rem; color: var(--ink-ghost); letter-spacing: 0.08em; font-weight: 300; line-height: 2.2; }
   footer a { color: var(--wood); text-decoration: none; }
@@ -783,152 +217,65 @@
 
 <main>
 
-  <!-- 오늘의 한마디 -->
+  <div class="print-header">
+    <h2 style="font-family:serif; font-weight:300; font-size:1.4rem;">손톱서점 마음방 — 오늘의 대화</h2>
+    <p style="font-size:0.8rem; color:#8a847a; margin-top:0.5rem;">웃네(박의섭) · 강원도 횡성 숲속 공방</p>
+  </div>
+
   <div class="daily-word" id="daily-word">
     <span class="daily-label">오늘의 한마디</span>
     <p class="daily-text" id="daily-text"></p>
   </div>
 
-  <!-- 카테고리 선택 -->
   <div class="category-section">
     <label class="category-label">어떤 이야기를 나눌까요?</label>
     <div class="category-grid">
-      <button class="cat-btn" id="cat-emotion" onclick="selectCategory('emotion')">
-        <span class="cat-icon">💧</span>
-        <span class="cat-name">감정</span>
-        <span class="cat-desc">요즘 감정이 힘들어요</span>
-      </button>
-      <button class="cat-btn" id="cat-direction" onclick="selectCategory('direction')">
-        <span class="cat-icon">🧭</span>
-        <span class="cat-name">방향</span>
-        <span class="cat-desc">어떻게 살아야 할지</span>
-      </button>
-      <button class="cat-btn" id="cat-relation" onclick="selectCategory('relation')">
-        <span class="cat-icon">🤝</span>
-        <span class="cat-name">관계</span>
-        <span class="cat-desc">사람 때문에 지쳐요</span>
-      </button>
-      <button class="cat-btn" id="cat-existence" onclick="selectCategory('existence')">
-        <span class="cat-icon">🔮</span>
-        <span class="cat-name">존재</span>
-        <span class="cat-desc">나는 누구인지 모르겠어요</span>
-      </button>
-      <button class="cat-btn" id="cat-spirit" onclick="selectCategory('spirit')">
-        <span class="cat-icon">🕯️</span>
-        <span class="cat-name">영성</span>
-        <span class="cat-desc">더 깊은 무언가가 궁금해요</span>
-      </button>
-      <button class="cat-btn" id="cat-inspire" onclick="selectCategory('inspire')">
-        <span class="cat-icon">💡</span>
-        <span class="cat-name">영감</span>
-        <span class="cat-desc">새로운 눈으로 보고 싶어요</span>
-      </button>
-      <button class="cat-btn" id="cat-daily" onclick="selectCategory('daily')">
-        <span class="cat-icon">🌱</span>
-        <span class="cat-name">일상</span>
-        <span class="cat-desc">단순하게 살고 싶어요</span>
-      </button>
+      <button class="cat-btn" id="cat-emotion" onclick="selectCategory('emotion')"><span class="cat-icon">💧</span><span class="cat-name">감정</span><span class="cat-desc">요즘 감정이 힘들어요</span></button>
+      <button class="cat-btn" id="cat-direction" onclick="selectCategory('direction')"><span class="cat-icon">🧭</span><span class="cat-name">방향</span><span class="cat-desc">어떻게 살아야 할지</span></button>
+      <button class="cat-btn" id="cat-relation" onclick="selectCategory('relation')"><span class="cat-icon">🤝</span><span class="cat-name">관계</span><span class="cat-desc">사람 때문에 지쳐요</span></button>
+      <button class="cat-btn" id="cat-existence" onclick="selectCategory('existence')"><span class="cat-icon">🔮</span><span class="cat-name">존재</span><span class="cat-desc">나는 누구인지 모르겠어요</span></button>
+      <button class="cat-btn" id="cat-spirit" onclick="selectCategory('spirit')"><span class="cat-icon">🕯️</span><span class="cat-name">영성</span><span class="cat-desc">더 깊은 무언가가 궁금해요</span></button>
+      <button class="cat-btn" id="cat-inspire" onclick="selectCategory('inspire')"><span class="cat-icon">💡</span><span class="cat-name">영감</span><span class="cat-desc">새로운 눈으로 보고 싶어요</span></button>
+      <button class="cat-btn" id="cat-daily" onclick="selectCategory('daily')"><span class="cat-icon">🌱</span><span class="cat-name">일상</span><span class="cat-desc">단순하게 살고 싶어요</span></button>
     </div>
   </div>
 
-  <!-- 모드 선택 -->
   <div class="mode-section">
     <label class="mode-label">오늘 어떤 방식으로 들어가고 싶으신가요? <span style="color:var(--wood)">둘 중 하나를 먼저 선택하세요</span></label>
     <div class="mode-buttons">
-      <button class="mode-btn" id="btn-warm" onclick="selectMode('warm')">
-        <span class="mode-icon">🌿</span>
-        <span class="mode-name">따뜻하게</span>
-        <span class="mode-desc">공감과 위로가 필요할 때</span>
-      </button>
-      <button class="mode-btn" id="btn-sharp" onclick="selectMode('sharp')">
-        <span class="mode-icon">🎋</span>
-        <span class="mode-name">뼈때리게</span>
-        <span class="mode-desc">직설적인 통찰이 필요할 때</span>
-      </button>
+      <button class="mode-btn" id="btn-warm" onclick="selectMode('warm')"><span class="mode-icon">🌿</span><span class="mode-name">따뜻하게</span><span class="mode-desc">공감과 위로가 필요할 때</span></button>
+      <button class="mode-btn" id="btn-sharp" onclick="selectMode('sharp')"><span class="mode-icon">🎋</span><span class="mode-name">뼈때리게</span><span class="mode-desc">직설적인 통찰이 필요할 때</span></button>
     </div>
   </div>
 
-  <!-- 입력 -->
   <div class="input-section" id="input-section">
-    <label class="input-label" for="user-input" id="input-label">지금 마음에 있는 것을 털어놓으세요</label>
-    <textarea
-      id="user-input"
-      placeholder="요즘 어떤 마음이 당신을 붙잡고 있나요? 작은 것도 괜찮습니다. 그대로 적어주세요."
-      maxlength="1000"
-    ></textarea>
-    <button class="submit-btn mode-warm" id="submit-btn" onclick="sendMessage()" disabled>
-      마음방으로 들어가기
-    </button>
+    <label class="input-label" for="user-input">지금 마음에 있는 것을 털어놓으세요</label>
+    <textarea id="user-input" placeholder="요즘 어떤 마음이 당신을 붙잡고 있나요? 작은 것도 괜찮습니다. 그대로 적어주세요." maxlength="1000"></textarea>
+    <button class="submit-btn mode-warm" id="submit-btn" onclick="sendMessage()" disabled>마음방으로 들어가기</button>
   </div>
 
-  <!-- 대화 히스토리 -->
-  <div class="chat-history" id="chat-history"></div>
-
-  <!-- 대화 이어가기 입력창 (첫 답변 후 표시) -->
-  <div class="continue-section" id="continue-section" style="display:none;">
-    <div class="continue-count" id="continue-count"></div>
-    <textarea
-      id="continue-input"
-      class="continue-textarea"
-      placeholder="이 질문에 대해 더 이야기해 주세요..."
-      maxlength="1000"
-    ></textarea>
-    <div class="continue-buttons">
-      <button class="submit-btn" id="continue-btn" onclick="continueChat()"
-        style="background:var(--wood);">
-        계속 이야기하기
-      </button>
-      <button class="reset-btn" onclick="resetForm()" style="margin-top:0;">
-        새 이야기 시작
-      </button>
-    </div>
-  </div>
-
-  <!-- 3회 제한 안내 -->
-  <div class="limit-block" id="limit-block" style="display:none;">
-    <p class="limit-text">
-      오늘 나눔이 깊어졌습니다.<br>
-      더 깊은 이야기는 뉴스레터에서 이어집니다.
-    </p>
-    <a href="#" class="share-btn kakao" style="display:flex;text-decoration:none;margin-top:1rem;">
-      📮 오마카세 성찰 레터 구독하기
-    </a>
-    <button class="reset-btn" onclick="resetForm()" style="margin-top:0.75rem;">
-      새 이야기 시작
-    </button>
-  <div class="error-block" id="error-block">
-    <p id="error-text"></p>
-  </div>
+  <div class="error-block" id="error-block"><p id="error-text"></p></div>
 
   <div class="loading" id="loading">
     <div class="loading-dots"><span></span><span></span><span></span></div>
     <p class="loading-text" id="loading-text">나무 깎듯 천천히, 마음을 들여다보고 있습니다</p>
   </div>
 
-  <!-- 답변 -->
-  <div class="response-section" id="response-section">
-    <div id="mode-badge" class="mode-badge warm">🌿 따뜻하게</div>
+  <div class="chat-history" id="chat-history"></div>
 
-    <div class="response-block">
-      <div class="step-label" id="label-insight">철학적 통찰</div>
-      <div class="response-text" id="insight-text"></div>
+  <div class="continue-section" id="continue-section" style="display:none;">
+    <div class="continue-count" id="continue-count"></div>
+    <textarea id="continue-input" class="continue-textarea" placeholder="이 질문에 대해 더 이야기해 주세요..." maxlength="1000"></textarea>
+    <div class="continue-buttons">
+      <button class="submit-btn" id="continue-btn" onclick="continueChat()" style="background:var(--wood);">계속 이야기하기</button>
+      <button class="reset-btn" onclick="resetForm()" style="margin-top:0;">새 이야기 시작</button>
     </div>
+  </div>
 
-    <div class="response-block">
-      <div class="step-label" id="label-meditation">명상적 접근</div>
-      <div class="response-text" id="meditation-text"></div>
-    </div>
+  <!-- 5회 끝날 때: 피드백 + 프린트 + 공유 -->
+  <div class="limit-block" id="limit-block" style="display:none;">
+    <p class="limit-text">오늘 나눔이 깊어졌습니다.<br>이 대화를 간직하고 싶으시면 저장해 두세요.</p>
 
-    <div class="response-block">
-      <div class="step-label">오늘의 질문</div>
-      <div class="coaching-block">
-        <div class="response-text" id="coaching-text"></div>
-      </div>
-    </div>
-
-    <button class="reset-btn" onclick="resetForm()">다른 이야기 꺼내기</button>
-
-    <!-- 별점 + 공유 -->
     <div class="feedback-section">
       <div class="star-section">
         <p class="feedback-label">오늘 마음방이 도움이 되었나요?</p>
@@ -943,24 +290,18 @@
       </div>
 
       <div class="share-section">
-        <p class="feedback-label">이 공간을 나누고 싶다면</p>
-        <button class="share-btn kakao" onclick="shareKakao()">
-          <span>💬</span> 카카오톡으로 공유
-        </button>
-        <button class="share-btn link" onclick="copyLink()">
-          <span>🔗</span> 링크 복사
-        </button>
+        <p class="feedback-label">오늘 대화 저장 · 나누기</p>
+        <button class="share-btn print" onclick="printChat()">🖨️ 대화 내용 인쇄 / PDF 저장</button>
+        <button class="share-btn kakao" onclick="shareKakao()"><span>💬</span> 카카오톡으로 공유</button>
+        <button class="share-btn link" onclick="copyLink()"><span>🔗</span> 링크 복사</button>
       </div>
     </div>
+
+    <button class="reset-btn" onclick="resetForm()" style="margin-top:1rem;">새 이야기 시작</button>
   </div>
 
-  <!-- 위기 안내 -->
   <div class="crisis-block" id="crisis-block">
-    <p class="crisis-message">
-      지금 많이 힘드신 것 같아 먼저 말씀드립니다.<br>
-      그 외로움과 무게, 혼자 감당하지 않아도 됩니다.<br>
-      지금 이 고통이 너무 벅차다면, 이 손을 잡아주세요.
-    </p>
+    <p class="crisis-message">지금 많이 힘드신 것 같아 먼저 말씀드립니다.<br>그 외로움과 무게, 혼자 감당하지 않아도 됩니다.<br>지금 이 고통이 너무 벅차다면, 이 손을 잡아주세요.</p>
     <div class="crisis-numbers">
       <strong>자살예방상담전화 1393</strong> (24시간, 무료)<br>
       <strong>정신건강위기상담전화 1577-0199</strong> (24시간)<br><br>
@@ -969,7 +310,6 @@
     <button class="reset-btn" onclick="resetForm()" style="margin-top:1.5rem;">처음으로 돌아가기</button>
   </div>
 
-  <!-- 만든 사람 소개 -->
   <div class="about-section">
     <div class="about-toggle" onclick="toggleAbout()">
       <span class="about-toggle-text">이 공간을 만든 사람</span>
@@ -979,11 +319,7 @@
       <div class="about-name">웃네 &nbsp;·&nbsp; 박의섭</div>
       <div class="about-roles">시인 &nbsp;·&nbsp; 목수 &nbsp;·&nbsp; 코치 &nbsp;·&nbsp; 명상가</div>
       <div class="about-divider"></div>
-      <p class="about-text">
-        강원도 횡성 숲속 공방에서 나무를 깎으며 시를 씁니다.<br><br>
-        나무를 깎다 보면 어느 순간 군더더기가 사라지고 본질만 남습니다. 삶도 그렇다고 생각합니다. 덜어낼수록 진짜가 보입니다.<br><br>
-        한국코치협회 인증 코치로 오랫동안 사람들의 이야기를 들어왔습니다. 철학과 명상, 코칭이 따로 있지 않습니다. 결국 하나입니다. 지금 이것.
-      </p>
+      <p class="about-text">강원도 횡성 숲속 공방에서 나무를 깎으며 시를 씁니다.<br><br>나무를 깎다 보면 어느 순간 군더더기가 사라지고 본질만 남습니다. 삶도 그렇다고 생각합니다. 덜어낼수록 진짜가 보입니다.<br><br>한국코치협회 인증 코치로 오랫동안 사람들의 이야기를 들어왔습니다. 철학과 명상, 코칭이 따로 있지 않습니다. 결국 하나입니다. 지금 이것.</p>
       <div class="about-divider"></div>
       <div class="about-book">
         <span class="about-book-label">첫 시집</span>
@@ -992,10 +328,7 @@
       </div>
       <div class="about-divider"></div>
       <div class="about-brand">
-        <p class="about-brand-text">
-          <strong>손톱서점</strong>은 시집·그림책·수필 각 1권씩, 늘 3권만 큐레이션하는 작은 서점입니다.<br>
-          많이 파는 것이 아니라, 꼭 맞는 한 권을 건네는 것이 목표입니다.
-        </p>
+        <p class="about-brand-text"><strong>손톱서점</strong>은 시집·그림책·수필 각 1권씩, 늘 3권만 큐레이션하는 작은 서점입니다.<br>많이 파는 것이 아니라, 꼭 맞는 한 권을 건네는 것이 목표입니다.</p>
       </div>
       <div class="about-links">
         <a href="https://pf.kakao.com/_xosonotopseojeon" target="_blank" class="about-link">💬 카카오 채널: 손톱서점</a>
@@ -1018,7 +351,7 @@
     <a href="https://pf.kakao.com/_xosonotopseojeon" target="_blank">카카오 채널: 손톱서점</a>
     &nbsp;·&nbsp;
     <a href="https://www.youtube.com/@CarvingStillness" target="_blank">유튜브: Carving Stillness</a><br>
-    <span style="font-size:0.65rem; letter-spacing:0.1em; opacity:0.6;">v1.3 · 2026.05.23</span>
+    <span style="font-size:0.65rem; letter-spacing:0.1em; opacity:0.6;">v1.4 · 2026.05.24</span>
   </p>
 </footer>
 
@@ -1030,134 +363,91 @@ let turnCount = 0;
 const MAX_TURNS = 5;
 
 const CATEGORY_PLACEHOLDERS = {
-  emotion: "요즘 감정이 힘들어요. 어떤 마음인지 털어놓아 볼게요...",
-  direction: "어떻게 살아야 할지 모르겠어요...",
-  relation: "사람 때문에 지쳐요...",
-  existence: "나는 누구인지, 삶의 의미가 뭔지 모르겠어요...",
-  spirit: "더 깊은 무언가가 궁금해요...",
-  inspire: "새로운 눈으로 보고 싶어요...",
-  daily: "단순하게 살고 싶은데 잘 안 돼요..."
+  emotion: '요즘 감정이 힘들어요. 어떤 마음인지 털어놓아 볼게요...',
+  direction: '어떻게 살아야 할지 모르겠어요...',
+  relation: '사람 때문에 지쳐요...',
+  existence: '나는 누구인지, 삶의 의미가 뭔지 모르겠어요...',
+  spirit: '더 깊은 무언가가 궁금해요...',
+  inspire: '새로운 눈으로 보고 싶어요...',
+  daily: '단순하게 살고 싶은데 잘 안 돼요...'
 };
 
 function selectCategory(cat) {
   currentCategory = cat;
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById('cat-' + cat).classList.add('active');
-  const ph = CATEGORY_PLACEHOLDERS[cat] || "지금 마음에 있는 것을 털어놓으세요.";
-  document.getElementById('user-input').placeholder = ph;
+  document.getElementById('user-input').placeholder = CATEGORY_PLACEHOLDERS[cat] || '지금 마음에 있는 것을 털어놓으세요.';
   checkSubmitReady();
 }
 
 function checkSubmitReady() {
-  const ready = currentMode && currentCategory;
-  document.getElementById('submit-btn').disabled = !ready;
+  document.getElementById('submit-btn').disabled = !(currentMode && currentCategory);
 }
+
 const STORAGE_KEY = 'sontop_chat';
 const EXPIRE_MIN = 30;
 
-// ── localStorage 저장/불러오기 ──
 function saveToStorage() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      currentMode, chatHistory, turnCount,
-      savedAt: Date.now()
-    }));
-  } catch(e) {}
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentMode, chatHistory, turnCount, savedAt: Date.now() })); } catch(e) {}
 }
 
 function loadFromStorage() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    var raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return false;
-    const data = JSON.parse(raw);
-    const elapsed = (Date.now() - data.savedAt) / 60000;
-    if (elapsed > EXPIRE_MIN) { localStorage.removeItem(STORAGE_KEY); return false; }
+    var data = JSON.parse(raw);
+    if ((Date.now() - data.savedAt) / 60000 > EXPIRE_MIN) { localStorage.removeItem(STORAGE_KEY); return false; }
     return data;
   } catch(e) { return false; }
 }
 
-function clearStorage() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-}
+function clearStorage() { try { localStorage.removeItem(STORAGE_KEY); } catch(e) {} }
 
-// ── 페이지 로드 시 이전 대화 복원 ──
 window.addEventListener('DOMContentLoaded', function() {
-  const saved = loadFromStorage();
+  var saved = loadFromStorage();
   if (!saved || saved.turnCount === 0 || !saved.chatHistory || saved.chatHistory.length === 0) return;
-
   currentMode = saved.currentMode;
   chatHistory = saved.chatHistory;
   turnCount = saved.turnCount;
-
-  // 입력창 숨기기
   document.getElementById('input-section').style.display = 'none';
-
-  // 모드 버튼 복원
   if (currentMode) {
     document.getElementById('btn-warm').className = 'mode-btn' + (currentMode === 'warm' ? ' active-warm' : '');
     document.getElementById('btn-sharp').className = 'mode-btn' + (currentMode === 'sharp' ? ' active-sharp' : '');
   }
-
-  // 대화 히스토리 복원 — 텍스트만 간단히 표시
-  const history = document.getElementById('chat-history');
-  const pairs = [];
-  for (let i = 0; i < chatHistory.length - 1; i += 2) {
-    if (chatHistory[i] && chatHistory[i+1]) {
-      pairs.push({ user: chatHistory[i].content, ai: chatHistory[i+1].content });
-    }
+  var history = document.getElementById('chat-history');
+  var pairs = [];
+  for (var i = 0; i < chatHistory.length - 1; i += 2) {
+    if (chatHistory[i] && chatHistory[i+1]) pairs.push({ user: chatHistory[i].content, ai: chatHistory[i+1].content });
   }
-
-  pairs.forEach(function(pair, idx) {
-    const isWarm = currentMode === 'warm';
-    const turn = document.createElement('div');
+  pairs.forEach(function(pair) {
+    var isWarm = currentMode === 'warm';
+    var turn = document.createElement('div');
     turn.className = 'chat-turn';
-    const lines = pair.ai.split('\n').filter(function(l) { return l.trim(); });
-    const insight = lines[0] || '';
-    const meditation = lines[1] || '';
-    const coaching = lines[2] || '';
+    var lines = pair.ai.split('\n').filter(function(l) { return l.trim(); });
     turn.innerHTML =
       '<div class="chat-user-msg">' + escapeHtml(pair.user) + '</div>' +
       '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
-      '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(insight) + '</div></div>' +
-      '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(meditation) + '</div></div>' +
-      '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(coaching) + '</div></div></div>' +
-      (idx === 0 ? feedbackHTML() : '');
+      '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(lines[0] || '') + '</div></div>' +
+      '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(lines[1] || '') + '</div></div>' +
+      '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(lines[2] || '') + '</div></div></div>';
     history.appendChild(turn);
   });
-
-  // 이어가기 또는 제한 표시
-  if (turnCount >= MAX_TURNS) {
-    showLimitBlock();
-  } else {
-    showContinueSection();
-  }
+  if (turnCount >= MAX_TURNS) { showLimitBlock(); } else { showContinueSection(); }
 });
 
 function selectMode(mode) {
   currentMode = mode;
-  const btnWarm = document.getElementById('btn-warm');
-  const btnSharp = document.getElementById('btn-sharp');
-  const submitBtn = document.getElementById('submit-btn');
-  btnWarm.className = 'mode-btn';
-  btnSharp.className = 'mode-btn';
-  if (mode === 'warm') {
-    btnWarm.classList.add('active-warm');
-    submitBtn.className = 'submit-btn mode-warm';
-    document.getElementById('loading-text').textContent = '나무 깎듯 천천히, 마음을 들여다보고 있습니다';
-  } else {
-    btnSharp.classList.add('active-sharp');
-    submitBtn.className = 'submit-btn mode-sharp';
-    document.getElementById('loading-text').textContent = '죽비를 들어 핵심을 찾고 있습니다';
-  }
+  document.getElementById('btn-warm').className = 'mode-btn' + (mode === 'warm' ? ' active-warm' : '');
+  document.getElementById('btn-sharp').className = 'mode-btn' + (mode === 'sharp' ? ' active-sharp' : '');
+  document.getElementById('submit-btn').className = 'submit-btn mode-' + mode;
+  document.getElementById('loading-text').textContent = mode === 'warm' ? '나무 깎듯 천천히, 마음을 들여다보고 있습니다' : '죽비를 들어 핵심을 찾고 있습니다';
   checkSubmitReady();
 }
 
 async function sendMessage() {
-  const input = document.getElementById('user-input');
-  const userMessage = input.value.trim();
+  var userMessage = document.getElementById('user-input').value.trim();
   if (!currentMode) { showError('먼저 위에서 따뜻하게 또는 뼈때리게를 선택해 주세요.'); return; }
-  if (!userMessage) { showError('마음에 있는 이야기를 먼저 적어주세요.'); return; }
-  if (userMessage.length < 5) { showError('조금 더 이야기해 주세요.'); return; }
+  if (!userMessage || userMessage.length < 5) { showError('조금 더 이야기해 주세요.'); return; }
   document.getElementById('input-section').style.display = 'none';
   hideError();
   showLoading(true);
@@ -1165,8 +455,8 @@ async function sendMessage() {
 }
 
 async function continueChat() {
-  const input = document.getElementById('continue-input');
-  const userMessage = input.value.trim();
+  var input = document.getElementById('continue-input');
+  var userMessage = input.value.trim();
   if (!userMessage || userMessage.length < 2) return;
   input.value = '';
   document.getElementById('continue-section').style.display = 'none';
@@ -1177,16 +467,16 @@ async function continueChat() {
 async function callAPI(userMessage) {
   chatHistory.push({ role: 'user', content: userMessage });
   try {
-    const response = await fetch('/api/chat', {
+    var response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userMessage, mode: currentMode, category: currentCategory, history: chatHistory, turnCount: turnCount })
     });
-    const data = await response.json();
+    var data = await response.json();
     if (!response.ok) throw new Error(data.error || 'HTTP_' + response.status);
     showLoading(false);
     if (data.crisis) { showCrisis(); return; }
-    const aiContent = (data.insight || '') + '\n' + (data.meditation || '') + '\n' + (data.question || '');
+    var aiContent = (data.insight || '') + '\n' + (data.meditation || '') + '\n' + (data.question || '');
     chatHistory.push({ role: 'assistant', content: aiContent });
     turnCount++;
     saveToStorage();
@@ -1200,39 +490,38 @@ async function callAPI(userMessage) {
 }
 
 function addChatTurn(userMsg, data) {
-  const history = document.getElementById('chat-history');
-  const isWarm = currentMode === 'warm';
-  const turn = document.createElement('div');
+  var history = document.getElementById('chat-history');
+  var isWarm = currentMode === 'warm';
+  var turn = document.createElement('div');
   turn.className = 'chat-turn';
   turn.innerHTML =
     '<div class="chat-user-msg">' + escapeHtml(userMsg) + '</div>' +
     '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '직설적 통찰') + '</div><div class="response-text">' + escapeHtml(data.insight) + '</div></div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '핵심 지적') + '</div><div class="response-text">' + escapeHtml(data.meditation) + '</div></div>' +
-    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.question) + '</div></div></div>' +
-    (data.poem ? '<div class="poem-card"><div class="poem-card-label">오늘의 처방 시</div><div class="poem-card-text">' + escapeHtml(data.poem) + '</div><div class="poem-card-author">— 웃네</div><button class="poem-share-btn" onclick="sharePoem(this)">📋 카드 공유하기</button></div>' : '') +
-    (turnCount === 1 ? feedbackHTML() : '');
+    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.question) + '</div></div></div>';
   history.appendChild(turn);
- turn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-setTimeout(function() { turn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
-}
-
-function feedbackHTML() {
-  return '<div class="feedback-section"><div class="star-section"><p class="feedback-label">오늘 마음방이 도움이 되었나요?</p><div class="stars"><span class="star" onclick="rateStar(1)">★</span><span class="star" onclick="rateStar(2)">★</span><span class="star" onclick="rateStar(3)">★</span><span class="star" onclick="rateStar(4)">★</span><span class="star" onclick="rateStar(5)">★</span></div><p class="star-msg" id="star-msg"></p></div><div class="share-section"><p class="feedback-label">이 공간을 나누고 싶다면</p><button class="share-btn kakao" onclick="shareKakao()"><span>💬</span> 카카오톡으로 공유</button><button class="share-btn link" onclick="copyLink()"><span>🔗</span> 링크 복사</button></div></div>';
+  // 답변 첫 부분으로 스크롤
+  setTimeout(function() { turn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 }
 
 function showContinueSection() {
-  const sec = document.getElementById('continue-section');
-  const remaining = MAX_TURNS - turnCount;
+  var sec = document.getElementById('continue-section');
+  var remaining = MAX_TURNS - turnCount;
   document.getElementById('continue-count').textContent = '대화 ' + turnCount + '/' + MAX_TURNS + ' · ' + remaining + '번 더 이어갈 수 있습니다';
   sec.style.display = 'block';
-  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(function() { sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 500);
   document.getElementById('continue-input').focus();
 }
 
 function showLimitBlock() {
-  document.getElementById('limit-block').style.display = 'block';
-  document.getElementById('limit-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var block = document.getElementById('limit-block');
+  block.style.display = 'block';
+  setTimeout(function() { block.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+}
+
+function printChat() {
+  window.print();
 }
 
 function escapeHtml(str) {
@@ -1258,9 +547,8 @@ function rateStar(n) {
 
 function shareKakao() {
   var url = 'https://sontop-sangdam.vercel.app';
-  var text = '손톱서점 마음방 — 지금 이것\n철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간\n\n' + url;
   if (navigator.share) { navigator.share({ title: '손톱서점 마음방', text: '철학으로 보고, 명상으로 들어가고, 질문으로 깨어나는 공간', url: url }); }
-  else { navigator.clipboard.writeText(text).then(function() { alert('링크가 복사됐습니다. 카카오톡에 붙여넣기 해주세요! 📋'); }); }
+  else { navigator.clipboard.writeText(url).then(function() { alert('링크가 복사됐습니다. 카카오톡에 붙여넣기 해주세요! 📋'); }); }
 }
 
 function copyLink() {
@@ -1272,20 +560,6 @@ function copyLink() {
     btn.innerHTML = '✅ 복사됐습니다';
     setTimeout(function() { btn.innerHTML = orig; }, 2000);
   }).catch(function() { alert('주소: https://sontop-sangdam.vercel.app'); });
-}
-
-function sharePoem(btn) {
-  var poemText = btn.parentElement.querySelector('.poem-card-text').textContent;
-  var shareText = poemText + '\n\n— 웃네\n\nhttps://sontop-sangdam.vercel.app';
-  if (navigator.share) {
-    navigator.share({ title: '웃네의 마음 문답 처방 시', text: shareText });
-  } else {
-    navigator.clipboard.writeText(shareText).then(function() {
-      var orig = btn.innerHTML;
-      btn.innerHTML = '✅ 복사됐습니다';
-      setTimeout(function() { btn.innerHTML = orig; }, 2000);
-    });
-  }
 }
 
 function resetForm() {
@@ -1319,12 +593,8 @@ var DAILY_WORDS = ["깎아내면 남는 것이 진짜입니다.","지금 이것.
   document.getElementById('daily-text').textContent = DAILY_WORDS[dayOfYear % DAILY_WORDS.length];
 })();
 
-document.getElementById('user-input').addEventListener('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendMessage();
-});
-document.getElementById('continue-input').addEventListener('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') continueChat();
-});
+document.getElementById('user-input').addEventListener('keydown', function(e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') sendMessage(); });
+document.getElementById('continue-input').addEventListener('keydown', function(e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') continueChat(); });
 </script>
 
 </body>
