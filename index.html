@@ -111,6 +111,36 @@
   .continue-textarea:focus { border-color: var(--wood-light); }
   .continue-buttons { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
 
+  .coach-question-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: transparent;
+    color: var(--wood);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 400;
+    border: 1px solid var(--wood-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+  .coach-question-btn:hover { background: var(--paper-warm); border-color: var(--wood); }
+
+  .coach-question-box {
+    display: none;
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--wood-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    animation: fadeIn 0.4s ease;
+  }
+  .coach-question-box.visible { display: block; }
+  .coach-question-box .response-text { color: var(--ink); font-size: 1rem; font-weight: 400; font-style: italic; }
+
   /* ── 5회 끝날 때 피드백 + 프린트 ── */
   .limit-block { margin-top: 2rem; padding: 1.75rem; background: var(--paper-warm); border-left: 3px solid var(--wood-light); border-radius: 0 var(--radius) var(--radius) 0; animation: fadeIn 0.6s ease; }
   .limit-text { font-family: var(--serif); font-size: 1rem; font-weight: 300; color: var(--ink-soft); line-height: 2; margin-bottom: 1.25rem; }
@@ -504,7 +534,8 @@ function addChatTurn(userMsg, data) {
     '<div class="mode-badge ' + (isWarm ? 'warm' : 'sharp') + '" style="margin-bottom:1.5rem;">' + (isWarm ? '🌿 따뜻하게' : '🎋 뼈때리게') + '</div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '철학적 통찰' : '핵심 통찰') + '</div><div class="response-text">' + escapeHtml(cleanSection(data.insight)) + '</div></div>' +
     '<div class="response-block"><div class="step-label">' + (isWarm ? '명상적 접근' : '직설적 질문') + '</div><div class="response-text">' + escapeHtml(cleanSection(data.meditation)) + '</div></div>' +
-    '<div class="response-block"><div class="step-label">오늘의 질문</div><div class="coaching-block"><div class="response-text">' + escapeHtml(data.question) + '</div></div></div>';
+    '<div class="coach-question-btn" onclick="toggleCoachQuestion(this)">🌿 코치의 질문 받기</div>' +
+    '<div class="coach-question-box"><div class="response-text">' + escapeHtml(data.question) + '</div></div>';
   history.appendChild(turn);
   // 답변 첫 부분으로 스크롤
   setTimeout(function() { turn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
@@ -523,6 +554,19 @@ function showLimitBlock() {
   var block = document.getElementById('limit-block');
   block.style.display = 'block';
   setTimeout(function() { block.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+}
+
+function toggleCoachQuestion(btn) {
+  var box = btn.nextElementSibling;
+  var isVisible = box.classList.contains('visible');
+  if (isVisible) {
+    box.classList.remove('visible');
+    btn.textContent = '🌿 코치의 질문 받기';
+  } else {
+    box.classList.add('visible');
+    btn.textContent = '🌿 질문 닫기';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function printChat() {
