@@ -77,12 +77,35 @@
 
   .loading { display: none; text-align: center; padding: 3rem 0; color: var(--ink-ghost); }
   .loading.visible { display: block; }
-  .loading-dots { display: inline-flex; gap: 6px; margin-bottom: 1rem; }
-  .loading-dots span { width: 6px; height: 6px; background: var(--wood-light); border-radius: 50%; animation: breathe 1.6s ease-in-out infinite; }
-  .loading-dots span:nth-child(2) { animation-delay: 0.3s; }
-  .loading-dots span:nth-child(3) { animation-delay: 0.6s; }
-  @keyframes breathe { 0%, 100% { opacity: 0.2; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1); } }
-  .loading-text { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 300; }
+  .loading-circle-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem; }
+  .loading-circle {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--wood-light);
+    opacity: 0.15;
+    animation: inkBreathe 2s ease-in-out infinite;
+  }
+  .loading-circle-inner {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--wood);
+    opacity: 0.25;
+    animation: inkBreathe 2s ease-in-out infinite 0.4s;
+    position: absolute;
+  }
+  .loading-circle-core {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--wood);
+    opacity: 0.6;
+    animation: inkBreathe 2s ease-in-out infinite 0.8s;
+    position: absolute;
+  }
+  @keyframes inkBreathe {
+    0%, 100% { transform: scale(0.85); opacity: 0.15; }
+    50% { transform: scale(1.15); opacity: 0.5; }
+  }
+  .loading-text { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 300; color: var(--ink-ghost); }
 
   .chat-history { margin-top: 2rem; display: flex; flex-direction: column; gap: 2.5rem; }
   .chat-turn { border-top: 1px solid var(--paper-dark); padding-top: 2rem; animation: fadeIn 0.6s ease; }
@@ -291,7 +314,11 @@
   <div class="error-block" id="error-block"><p id="error-text"></p></div>
 
   <div class="loading" id="loading">
-    <div class="loading-dots"><span></span><span></span><span></span></div>
+    <div class="loading-circle-wrap">
+      <div class="loading-circle"></div>
+      <div class="loading-circle-inner"></div>
+      <div class="loading-circle-core"></div>
+    </div>
     <p class="loading-text" id="loading-text">나무 깎듯 천천히, 마음을 들여다보고 있습니다</p>
   </div>
 
