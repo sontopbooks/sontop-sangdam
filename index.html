@@ -198,13 +198,13 @@
 
   .category-section { margin-bottom: 1.5rem; }
   .category-label { display: block; font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 0.75rem; font-weight: 400; }
-  .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
   .cat-btn { padding: 0.7rem 0.5rem; font-family: var(--serif); font-size: 0.82rem; font-weight: 400; border: 1px solid var(--paper-dark); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; background: var(--paper-warm); color: var(--ink-soft); text-align: center; line-height: 1.5; }
   .cat-btn:hover { border-color: var(--wood-light); color: var(--ink); }
   .cat-btn.active { background: var(--wood); border-color: var(--wood); color: white; }
   .cat-btn .cat-icon { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
   .cat-btn .cat-name { font-weight: 500; display: block; font-size: 0.8rem; }
-  .cat-btn .cat-desc { font-size: 0.68rem; opacity: 0.8; display: block; font-family: var(--sans); }
+  .cat-btn .cat-desc { font-size: 0.72rem; opacity: 0.8; display: block; font-family: var(--sans); }
 
   /* ── 프린트 스타일 ── */
   @media print {
@@ -255,7 +255,6 @@
     .mode-buttons { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .mode-btn { padding: 0.75rem 0.5rem; font-size: 0.82rem; }
     .category-grid { grid-template-columns: repeat(2, 1fr); }
-    .cat-btn .cat-desc { display: none; }
   }
 </style>
 </head>
@@ -287,13 +286,10 @@
   <div class="category-section">
     <label class="category-label">어떤 이야기를 나눌까요?</label>
     <div class="category-grid">
-      <button class="cat-btn" id="cat-emotion" onclick="selectCategory('emotion')"><span class="cat-icon">💧</span><span class="cat-name">감정</span><span class="cat-desc">요즘 감정이 힘들어요</span></button>
-      <button class="cat-btn" id="cat-direction" onclick="selectCategory('direction')"><span class="cat-icon">🧭</span><span class="cat-name">방향</span><span class="cat-desc">어떻게 살아야 할지</span></button>
+      <button class="cat-btn" id="cat-emotion" onclick="selectCategory('emotion')"><span class="cat-icon">💧</span><span class="cat-name">감정</span><span class="cat-desc">지금 마음이 힘들어요</span></button>
       <button class="cat-btn" id="cat-relation" onclick="selectCategory('relation')"><span class="cat-icon">🤝</span><span class="cat-name">관계</span><span class="cat-desc">사람 때문에 지쳐요</span></button>
-      <button class="cat-btn" id="cat-existence" onclick="selectCategory('existence')"><span class="cat-icon">🔮</span><span class="cat-name">존재</span><span class="cat-desc">나는 누구인지 모르겠어요</span></button>
-      <button class="cat-btn" id="cat-spirit" onclick="selectCategory('spirit')"><span class="cat-icon">🕯️</span><span class="cat-name">영성</span><span class="cat-desc">더 깊은 무언가가 궁금해요</span></button>
-      <button class="cat-btn" id="cat-inspire" onclick="selectCategory('inspire')"><span class="cat-icon">💡</span><span class="cat-name">영감</span><span class="cat-desc">새로운 눈으로 보고 싶어요</span></button>
-      <button class="cat-btn" id="cat-daily" onclick="selectCategory('daily')"><span class="cat-icon">🌱</span><span class="cat-name">일상</span><span class="cat-desc">단순하게 살고 싶어요</span></button>
+      <button class="cat-btn" id="cat-direction" onclick="selectCategory('direction')"><span class="cat-icon">🧭</span><span class="cat-name">삶의 방향</span><span class="cat-desc">어떻게 살아야 할지 모르겠어요</span></button>
+      <button class="cat-btn" id="cat-spirit" onclick="selectCategory('spirit')"><span class="cat-icon">🕯️</span><span class="cat-name">영감과 영성</span><span class="cat-desc">더 깊은 눈으로 보고 싶어요</span></button>
     </div>
   </div>
 
@@ -426,18 +422,16 @@ const MAX_TURNS = 5;
 
 const CATEGORY_PLACEHOLDERS = {
   emotion: '요즘 감정이 힘들어요. 어떤 마음인지 털어놓아 볼게요...',
-  direction: '어떻게 살아야 할지 모르겠어요...',
-  relation: '사람 때문에 지쳐요...',
-  existence: '나는 누구인지, 삶의 의미가 뭔지 모르겠어요...',
-  spirit: '더 깊은 무언가가 궁금해요...',
-  inspire: '새로운 눈으로 보고 싶어요...',
-  daily: '단순하게 살고 싶은데 잘 안 돼요...'
+  relation: '사람 때문에 지쳐요. 어떤 관계가 힘드신가요...',
+  direction: '어떻게 살아야 할지 모르겠어요. 일상이 막막하게 느껴질 때...',
+  spirit: '더 깊은 눈으로 보고 싶어요. 존재와 영성에 대한 궁금함...'
 };
 
 function selectCategory(cat) {
   currentCategory = cat;
   document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('cat-' + cat).classList.add('active');
+  var btn = document.getElementById('cat-' + cat);
+  if (btn) btn.classList.add('active');
   document.getElementById('user-input').placeholder = CATEGORY_PLACEHOLDERS[cat] || '지금 마음에 있는 것을 털어놓으세요.';
   checkSubmitReady();
 }
